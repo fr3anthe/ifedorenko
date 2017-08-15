@@ -39,4 +39,31 @@ public class MaxTest {
 		int result = maxim.max(1, 1);
 		assertThat(result, is(1));
 	}
+	/**
+	 * Test first more second and third value.
+	 */
+	@Test
+	public void whenFirstMoreSecondAndThird() {
+		Max maxim = new Max();
+		int result = maxim.max(3, 2, 1);
+		assertThat(result, is(3));
+	}
+	/**
+	 * Test second more first and third value.
+	 */
+	@Test
+	public void whenSecondMoreFirstAndThird() {
+		Max maxim = new Max();
+		int result = maxim.max(2, 4, 2);
+		assertThat(result, is(4));
+	}
+	/**
+	 * Test third more first and second value.
+	 */
+	@Test
+	public void whenThirdMoreFirstAndSecond() {
+		Max maxim = new Max();
+		int result = maxim.max(3, 5, 7);
+		assertThat(result, is(7));
+	}
 }
