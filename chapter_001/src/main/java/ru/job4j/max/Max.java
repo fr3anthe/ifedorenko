@@ -23,9 +23,6 @@ public class Max {
 	*@return Большее из трех
 	*/
 	public int max(int first, int second, int third) {
-		while (first >= this.max(second, third)) {
-			return first;
-		}
-		return this.max(second, third);
+		return max(first, max(second, third));
 	}
 }
