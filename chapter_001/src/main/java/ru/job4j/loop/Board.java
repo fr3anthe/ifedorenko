@@ -17,21 +17,11 @@ public class Board {
 		StringBuilder builder = new StringBuilder();
 		String result;
 		for (int i = 0; i < height; i++) {
-			if (i % 2 == 0) {
-				for (int j = 0; j < width; j++) {
-					if (j % 2 == 0) {
-						builder.append("x");
-					} else {
-						builder.append(" ");
-					}
-				}
-			} else {
-				for (int j = 0; j < width; j++) {
-					if (j % 2 == 0) {
-						builder.append(" ");
-					} else {
-						builder.append("x");
-					}
+			for (int j = 0; j < width; j++) {
+				if ((i + j) % 2 == 0) {
+					builder.append("x");
+				} else {
+					builder.append(" ");
 				}
 			}
 			builder.append(System.getProperty("line.separator"));
