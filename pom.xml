@@ -7,6 +7,10 @@
 	<name>junior</name>
 	<url>http://job4j.ru/</url>
 
+	<modules>
+		<module>chapter_001</module>
+		<module>chapter_002</module>
+	</modules>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -59,8 +63,4 @@
 			</plugin>
 		</plugins>
 	</build> 
-	<modules>
-		<module>chapter_001</module>
-		<module>chapter_002</module>
-	</modules>
 </project>
