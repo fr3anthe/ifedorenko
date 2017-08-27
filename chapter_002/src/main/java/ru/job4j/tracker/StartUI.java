@@ -9,11 +9,11 @@ public class StartUI {
 	/**
 	 *@param tracker хранит ссылку на объект.
 	 */
-	private Tracker tracker = new Tracker();
+	private Tracker tracker;
 	/**
 	 *@param хранит ссылку на объект .
 	 */
-	private Input input = new ConsoleInput();
+	private Input input;
 	/**
 	 *@param ADD переменная для добавления завки
 	 */
@@ -57,6 +57,15 @@ public class StartUI {
 		}
 	}
 
+	/**
+	 * Базовый конструктор для работы с StartUI.
+	 * @param input объект типа Input
+	 * @param tracker объект типа Tracker
+	 */
+	public StartUI(Input input, Tracker tracker) {
+		this.input = input;
+		this.tracker = tracker;
+	}
 	/**
 	 * Метод для выбора пункта с меню.
 	 * @param value пункт меню
@@ -166,7 +175,9 @@ public class StartUI {
 	 * @param args для ввод из консоли
 	 */
 	public static void main(String[] args) {
-		StartUI start = new StartUI();
+		Input input = new ConsoleInput();
+		Tracker tracker = new Tracker();
+		StartUI start = new StartUI(input, tracker);
 		start.allAction();
 	}
 }
