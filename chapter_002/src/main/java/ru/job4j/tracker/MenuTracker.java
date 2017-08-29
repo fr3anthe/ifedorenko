@@ -90,7 +90,13 @@ public class MenuTracker {
 		this.input = input;
 		this.tracker = tracker;
 	}
-
+	/**
+	 * Метод для получения массива меню.
+	 * @return длину массива
+	 */
+	public int getActionsLentgh() {
+		return this.actions.length;
+	}
 	/**
 	 * Метод заполняет массив.
 	 */

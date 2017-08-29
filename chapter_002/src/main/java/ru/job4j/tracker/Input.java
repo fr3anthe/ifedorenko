@@ -13,4 +13,11 @@ public interface Input {
 	 * @return введенную строку
 	 */
 	String ask(String question);
+	/**
+	 * Метод ask. Перегрузка.
+	 * @param question Вопрос-подсказка для пользователя.
+	 * @param range содержит диапазон значений меню.
+	 * @return введенную строку
+	 */
+	int ask(String question, int[] range);
 }
