@@ -16,7 +16,7 @@ public class StubInputTest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "Igor", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "Igor", "desc", "y"});
         new StartUI(input, tracker).allAction();
         assertThat(tracker.findAll()[0].getName(), is("Igor"));
     }
@@ -28,7 +28,7 @@ public class StubInputTest {
         Tracker tracker = new Tracker();
 		Item item1 = tracker.add(new Item());
 		Item item2 = tracker.add(new Item());
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).allAction();
 		Item[] except = {item1, item2};
 		assertThat(tracker.findAll(), is(except));
@@ -41,7 +41,7 @@ public class StubInputTest {
     public void whenUserUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item());
-        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "y"});
         new StartUI(input, tracker).allAction();
         assertThat(tracker.findById(item.getId()).getName(), is("test name"));
     }
@@ -53,7 +53,7 @@ public class StubInputTest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item());
         Item item2 = tracker.add(new Item());
-        Input input = new StubInput(new String[]{"3", item1.getId(), "6"});
+        Input input = new StubInput(new String[]{"3", item1.getId(), "y"});
         new StartUI(input, tracker).allAction();
         assertThat(tracker.findAll()[0], is(item2));
     }
@@ -64,7 +64,7 @@ public class StubInputTest {
     public void whenUserFindByIdThenReturnItemWithOurId() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item());
-        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         new StartUI(input, tracker).allAction();
         assertThat(tracker.findById(tracker.findAll()[0].getId()), is(item));
     }
@@ -77,7 +77,7 @@ public class StubInputTest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("Igor", "desc1", System.currentTimeMillis()));
         Item item2 = tracker.add(new Item("Dasha", "desc2", System.currentTimeMillis()));
-        Input input = new StubInput(new String[]{"5", "Igor", "6"});
+        Input input = new StubInput(new String[]{"5", "Igor", "y"});
         new StartUI(input, tracker).allAction();
         assertThat(tracker.findByName("Igor")[0], is(item1));
     }
