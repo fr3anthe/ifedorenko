@@ -1,4 +1,4 @@
-package ru.job4j.lite;
+package ru.job4j.lite.collections;
 
 import java.util.Collection;
 
