@@ -37,10 +37,25 @@ public class ConvertList {
         int index = 0;
         int[][] result = new int[rows][col];
         for (Integer value : list) {
-            if(value != null) {
+            if (value != null) {
                 result[index / col][index++ % col] = value;
             } else {
                 result[index / col][index++ % col] = 0;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Convert List<int[]> to List<Integer>.
+     * @param list list<int[]>
+     * @return List<Integer> of List<int[]>
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] arrays : list) {
+            for (int array : arrays) {
+                result.add(array);
             }
         }
         return result;

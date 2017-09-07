@@ -1,5 +1,6 @@
 package ru.job4j.collections;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
@@ -34,5 +35,18 @@ public class ConvertListTest {
 	   int[][] result = cl.toArray(list, 4);
 	   int[][] expect = {{1, 2, 0}, {4, 5, 6}, {7, 8, 9}, {10, 0, 0}};
 	   assertThat(result, is(expect));
+	}
+	/**
+	 *Test from List<int[]> to List<Integer>.
+	 */
+	@Test
+	public void whenAddListOfArraysWhenReturnListOfInteger() {
+		ConvertList cl = new ConvertList();
+		List<int[]> list = new ArrayList<>();
+		list.add(new int[]{1, 2, 7});
+		list.add(new int[]{3, 4, 8, 9});
+		List<Integer> result = cl.convert(list);
+		List<Integer> expect = Arrays.asList(1, 2, 7, 3, 4, 8, 9);
+		assertThat(result, is(expect));
 	}
 }
