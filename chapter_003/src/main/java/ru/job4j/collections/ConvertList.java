@@ -36,9 +36,13 @@ public class ConvertList {
         int col = size % rows == 0 ? size / rows : (size + rows) / rows; //определяем сколько элементов будет в каждой строке.
         int index = 0;
         int[][] result = new int[rows][col];
-        for (int value : list) {
-            result[index / col][index++ % col] = value;
+        for (Integer value : list) {
+            if(value != null) {
+                result[index / col][index++ % col] = value;
+            } else {
+                result[index / col][index++ % col] = 0;
             }
+        }
         return result;
     }
 }

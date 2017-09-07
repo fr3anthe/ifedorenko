@@ -30,9 +30,9 @@ public class ConvertListTest {
    @Test
 	public void whenAddListAndValueOfRowThenReturnArray() {
 	   ConvertList cl = new ConvertList();
-	   List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+	   List<Integer> list = Arrays.asList(1, 2, null, 4, 5, 6, 7, 8, 9, 10);
 	   int[][] result = cl.toArray(list, 4);
-	   int[][] expect = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 0, 0}};
+	   int[][] expect = {{1, 2, 0}, {4, 5, 6}, {7, 8, 9}, {10, 0, 0}};
 	   assertThat(result, is(expect));
 	}
 }
