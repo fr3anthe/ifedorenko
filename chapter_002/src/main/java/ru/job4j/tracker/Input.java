@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  *Интерфейс tracker.
  *@author ifedorenko
@@ -19,5 +21,5 @@ public interface Input {
 	 * @param range содержит диапазон значений меню.
 	 * @return введенную строку
 	 */
-	int ask(String question, int[] range);
+	int ask(String question, List<Integer> range);
 }

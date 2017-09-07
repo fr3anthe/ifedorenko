@@ -1,4 +1,8 @@
 package ru.job4j.tracker;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *Класс StartUI.
  *@author ifedorenko
@@ -28,11 +32,11 @@ public class StartUI {
 	 */
 	public void allAction() {
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
-		int[] range = new int[menu.getActionsLentgh()];
-		for (int i = 0; i < range.length; i++) {
-			range[i] = i;
-		}
+		List<Integer> range = new ArrayList<>();
 		menu.fillActions();
+		for (int i = 0; i < menu.getActionsLentgh(); i++) {
+			range.add(i);
+		}
 		do {
 			menu.show();
 			menu.select(input.ask("select:", range));

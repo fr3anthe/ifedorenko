@@ -1,6 +1,10 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
@@ -18,7 +22,7 @@ public class StubInputTest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "Igor", "desc", "y"});
         new StartUI(input, tracker).allAction();
-        assertThat(tracker.findAll()[0].getName(), is("Igor"));
+        assertThat(tracker.getItems().get(0).getName(), is("Igor"));
     }
     /**
      * Test SHow All.
@@ -30,8 +34,8 @@ public class StubInputTest {
 		Item item2 = tracker.add(new Item());
         Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).allAction();
-		Item[] except = {item1, item2};
-		assertThat(tracker.findAll(), is(except));
+		List<Item> except = Arrays.asList(item1, item2);
+		assertThat(tracker.getItems(), is(except));
 
     }
     /**
@@ -55,7 +59,7 @@ public class StubInputTest {
         Item item2 = tracker.add(new Item());
         Input input = new StubInput(new String[]{"3", item1.getId(), "y"});
         new StartUI(input, tracker).allAction();
-        assertThat(tracker.findAll()[0], is(item2));
+        assertThat(tracker.getItems().get(0), is(item2));
     }
     /**
      * Test FindById.
@@ -66,7 +70,7 @@ public class StubInputTest {
         Item item = tracker.add(new Item());
         Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         new StartUI(input, tracker).allAction();
-        assertThat(tracker.findById(tracker.findAll()[0].getId()), is(item));
+        assertThat(tracker.findById(tracker.getItems().get(0).getId()), is(item));
     }
 
     /**
@@ -79,6 +83,6 @@ public class StubInputTest {
         Item item2 = tracker.add(new Item("Dasha", "desc2", System.currentTimeMillis()));
         Input input = new StubInput(new String[]{"5", "Igor", "y"});
         new StartUI(input, tracker).allAction();
-        assertThat(tracker.findByName("Igor")[0], is(item1));
+        assertThat(tracker.findByName("Igor").get(0), is(item1));
     }
 }

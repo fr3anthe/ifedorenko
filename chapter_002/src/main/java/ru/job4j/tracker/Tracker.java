@@ -1,7 +1,8 @@
 package ru.job4j.tracker;
 
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -18,11 +19,7 @@ public class Tracker {
 	/**
 	*@param массив на 100 элементов, для хранения заявок
 	*/
-	private Item[] items = new Item[100];
-	/**
-	*@param текущая позиция в массиве
-	*/
-	private int position = 0;
+	private List<Item> items = new ArrayList<>();
 	/**
 	*Метод добавляет новую заявку в систему.
 	*@param item заявка
@@ -30,7 +27,7 @@ public class Tracker {
 	*/
 	public Item add(Item item) {
 		item.setId(this.generateId());
-		this.items[position++] = item;
+		items.add(item);
 		return item;
 	}
 	/**
@@ -39,9 +36,9 @@ public class Tracker {
 	*/
 	public void update(Item item) {
 		String id = item.getId();
-		for (int i = 0; i < this.items.length; i++) {
-			if (this.items[i].getId().equals(id)) {
-				this.items[i] = item;
+		for (int i = 0; i < this.items.size(); i++) {
+			if (this.items.get(i).getId().equals(id)) {
+				this.items.set(i, item);
 				break;
 			}
 		}
@@ -52,41 +49,34 @@ public class Tracker {
 	*/
 	public void delete(Item item) {
 		String id = item.getId(); //получаем id удаляемого объекта
-		int length = this.items.length;
+		int length = this.items.size();
 		for (int i = 0; i < length; i++) {
-				if (this.items[i].getId().equals(id)) { //ищем по id элемент, который хотим удалить.
-					int pos = length - 1 - i;
-					System.arraycopy(this.items, i + 1, this.items, i, pos);
-					this.items[this.position - 1] = null;
-					this.position--;
+				if (this.items.get(i).getId().equals(id)) { //ищем по id элемент, который хотим удалить.
+					this.items.remove(i);
 					break;
 				}
 		}
 	}
 	/**
-	*Метод ищет все заведенные заявки в системе..
+	*Getter.
 	*@return массив из заведенных в систему заявок
 	*/
-	public Item[] findAll() {
-		Item[] result = new Item[this.position];
-		for (int index = 0; index != this.position; index++) {
-			result[index] = this.items[index];
-		}
-		return result;
+	public List<Item> getItems() {
+		return items;
 	}
+
 	/**
 	*@param key Имя заявки
 	*@return Массив из элементов, с заданным именем
 	*/
-	public Item[] findByName(String key) {
-		int index = 0;
-		Item[] result = new Item[position];
-		for (int i = 0; i != this.position; i++) {
-			if (this.items[i].getName().equals(key)) {
-				result[index++] = this.items[i]; //Добавляем в массив элемент, у которого getName совпадает с key
+	public List<Item> findByName(String key) {
+		List<Item> result = new ArrayList<>();
+		for (Item item : this.items) {
+			if (item.getName().equals(key)) {
+				result.add(item);
 			}
 		}
-		return Arrays.copyOf(result, index); //возвращаем массив без элементов с null
+		return result; //возвращаем массив без элементов с null
 	}
 	/**
 	*Метод генерирует id для заявки.

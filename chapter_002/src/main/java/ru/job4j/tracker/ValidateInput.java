@@ -1,4 +1,7 @@
 package ru.job4j.tracker;
+
+import java.util.List;
+
 /**
  *Класс  ValidateInput.
  *@author ifedorenko
@@ -12,7 +15,7 @@ public class  ValidateInput extends ConsoleInput {
 	 * @param range содержит диапазон значений меню.
 	 * @return значение ключа
 	 */
-	public int ask(String question, int[] range) {
+	public int ask(String question, List<Integer> range) {
 		boolean invalid = true;
 		int value = -1;
 		do {

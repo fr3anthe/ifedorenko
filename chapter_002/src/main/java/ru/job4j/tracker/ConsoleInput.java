@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.List;
 import java.util.Scanner;
 /**
  *Класс ConsoleInput.
@@ -27,7 +28,7 @@ public class ConsoleInput implements Input {
 	 * @param range содержит диапазон значений меню.
 	 * @return введенную строку
 	 */
-	public int ask(String question, int[] range) {
+	public int ask(String question, List<Integer> range) {
 		int key = Integer.valueOf(this.ask(question));
 		boolean exist = false;
 		for (int value : range) {
