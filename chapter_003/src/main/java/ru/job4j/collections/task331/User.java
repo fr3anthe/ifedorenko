@@ -41,6 +41,14 @@ public class User implements Comparable<User> {
      * @return age
      */
     public int getAge() {
-        return age;
+        return this.age;
+    }
+
+    /**
+     * Getter name.
+     * @return name
+     */
+    public String getName() {
+        return this.name;
     }
 }
