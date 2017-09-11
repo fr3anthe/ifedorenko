@@ -24,6 +24,14 @@ public class User {
     }
 
     /**
+     * Getter name.
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Override equals.
      * @param o User
      * @return result
@@ -42,6 +50,7 @@ public class User {
         if (name != null ? !name.equals(user.name) : user.name != null) {
             return false;
         }
+
         return passport != null ? passport.equals(user.passport) : user.passport == null;
     }
 

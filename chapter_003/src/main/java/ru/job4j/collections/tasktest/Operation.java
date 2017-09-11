@@ -36,11 +36,11 @@ public class Operation {
      * @param account account for adding
      */
     public void addAccountToUser(User user, Account account) {
-        for (Map.Entry<User, List<Account>> map : this.info.entrySet()) {
-            if (map.getKey().equals(user)) {
-                map.getValue().add(account);
-                break;
-            }
+        List<Account> result = this.info.get(user);
+        if (result.equals(null)) {
+            System.out.println("User " + user.getName() + " not found");
+        } else {
+            result.add(account);
         }
     }
 
@@ -50,10 +50,14 @@ public class Operation {
      * @param account account for deleting
      */
     public void deleteAccountFromUser(User user, Account account) {
-        for (Map.Entry<User, List<Account>> map : this.info.entrySet()) {
-            if (map.getKey().equals(user)) {
-                map.getValue().remove(account);
-                break;
+        List<Account> result = this.info.get(user);
+        if (result.equals(null)) {
+            System.out.println("User " + user.getName() + " not found");
+        } else {
+            if (result.contains(account)) {
+                result.remove(account);
+            } else {
+                System.out.println("Account " + account.getRequisites() + " not found");
             }
         }
     }
@@ -65,10 +69,10 @@ public class Operation {
      */
     public List<Account> getUserAccounts(User user) {
         List<Account> result = new ArrayList<>();
-        for (User us : this.info.keySet()) {
-            if (user.hashCode() == us.hashCode()) {
-               result = this.info.get(us);
-            }
+        if (this.info.get(user).equals(null)) {
+            System.out.println("User " + user.getName() + " not found");
+        } else {
+            result = this.info.get(user);
         }
         return result;
     }
@@ -81,17 +85,14 @@ public class Operation {
      */
     public boolean checkAccount(User user, Account account) {
         boolean result = false;
-        List<Account> list = new ArrayList<>();
-        for (User us : this.info.keySet()) {
-            if (us.equals(user)) {
-                list = this.info.get(us);
-                break;
-            }
-        }
-        for (Account acc : list) {
-            if (acc.equals(account)) {
-                result = true;
-                break;
+        List<Account> list = this.info.get(user);
+        if (list.equals(null)) {
+            System.out.println("User " + user.getName() + " not found");
+        } else {
+            if (list.contains(account)) {
+                return true;
+            } else {
+                System.out.println("Account " + account.getRequisites() + " not found");
             }
         }
         return result;
@@ -112,6 +113,7 @@ public class Operation {
             if (srcAccount.getValue() > amount) {
                 srcAccount.setValue(srcAccount.getValue() - amount);
                 dstAccount.setValue(dstAccount.getValue() + amount);
+                result = true;
             } else {
                 System.out.println("Не счете " + srcAccount + "недостаточно средств");
             }
