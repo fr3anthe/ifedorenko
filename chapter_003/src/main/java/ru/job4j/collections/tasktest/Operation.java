@@ -36,12 +36,7 @@ public class Operation {
      * @param account account for adding
      */
     public void addAccountToUser(User user, Account account) {
-        List<Account> result = this.info.get(user);
-        if (result.equals(null)) {
-            System.out.println("User " + user.getName() + " not found");
-        } else {
-            result.add(account);
-        }
+        this.getUserAccounts(user).add(account);
     }
 
     /**
@@ -50,15 +45,8 @@ public class Operation {
      * @param account account for deleting
      */
     public void deleteAccountFromUser(User user, Account account) {
-        List<Account> result = this.info.get(user);
-        if (result.equals(null)) {
-            System.out.println("User " + user.getName() + " not found");
-        } else {
-            if (result.contains(account)) {
-                result.remove(account);
-            } else {
-                System.out.println("Account " + account.getRequisites() + " not found");
-            }
+        if (this.checkAccount(user, account)) {
+            this.getUserAccounts(user).remove(account);
         }
     }
 
@@ -69,10 +57,10 @@ public class Operation {
      */
     public List<Account> getUserAccounts(User user) {
         List<Account> result = new ArrayList<>();
-        if (this.info.get(user).equals(null)) {
-            System.out.println("User " + user.getName() + " not found");
-        } else {
+        if (this.info.containsKey(user)) {
             result = this.info.get(user);
+        } else {
+            System.out.println("User " + user.getName() + " not found");
         }
         return result;
     }
@@ -85,15 +73,10 @@ public class Operation {
      */
     public boolean checkAccount(User user, Account account) {
         boolean result = false;
-        List<Account> list = this.info.get(user);
-        if (list.equals(null)) {
-            System.out.println("User " + user.getName() + " not found");
+        if (this.getUserAccounts(user).contains(account)) {
+            result = true;
         } else {
-            if (list.contains(account)) {
-                return true;
-            } else {
-                System.out.println("Account " + account.getRequisites() + " not found");
-            }
+            System.out.println("Account " + account.getRequisites() + " not found");
         }
         return result;
     }
