@@ -1,10 +1,11 @@
 package ru.job4j.personaltasks;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,6 +16,7 @@ public class SortDepartment {
 
     /**
      * Sort by Ascending.
+     *
      * @param department Array for sort
      * @return sorted array
      */
@@ -25,27 +27,31 @@ public class SortDepartment {
 
     /**
      * Sort by descending.
+     *
      * @param department Array for sort
      * @return sorted array
      */
     public String[] sortDescending(String[] department) {
-        List<String> list = Arrays.asList(this.add(department));
-        Collections.sort(list, new Comparator<String>() {
+        String[] temp = this.add(department);
+        Map<String, String[]> map = new TreeMap<>();
+        for (int i = 0; i < temp.length; i++) {
+            map.put(temp[i], temp[i].split("/"));
+        }
+        List<String> list = new ArrayList<>(map.keySet());
+        list.sort(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 int result = 0;
-                String[] s1 = o1.split("/");
-                String[] s2 = o2.split("/");
-                if (s2.length == s1.length) {
-                    for (int i = 0; i < s1.length; i++) {
-                        if (!s1[i].equals(s2[i])) {
+                if (map.get(o1).length == map.get(o2).length) {
+                    for (int i = 0; i < map.get(o1).length; i++) {
+                        if (!map.get(o1)[i].equals(map.get(o2)[i])) {
                             result = o2.compareTo(o1);
                         }
                     }
                 } else {
-                    int lenght = s1.length > s2.length ? s2.length : s1.length;
-                    for (int i = 0; i < lenght; i++) {
-                        if (!s1[i].equals(s2[i])) {
+                    int length = map.get(o1).length > map.get(o2).length ? map.get(o2).length : map.get(o1).length;
+                    for (int i = 0; i < length; i++) {
+                        if (!map.get(o1)[i].equals(map.get(o2)[i])) {
                             result = o2.compareTo(o1);
                         }
                     }
