@@ -1,10 +1,5 @@
 package ru.job4j.personaltasks;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -33,34 +28,22 @@ public class SortDepartment {
      */
     public String[] sortDescending(String[] department) {
         String[] temp = this.add(department);
-        Map<String, String[]> map = new TreeMap<>();
-        for (int i = 0; i < temp.length; i++) {
-            map.put(temp[i], temp[i].split("/"));
-        }
-        List<String> list = new ArrayList<>(map.keySet());
-        list.sort(new Comparator<String>() {
+        Set<String> set = new TreeSet<>(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 int result = 0;
-                if (map.get(o1).length == map.get(o2).length) {
-                    for (int i = 0; i < map.get(o1).length; i++) {
-                        if (!map.get(o1)[i].equals(map.get(o2)[i])) {
-                            result = o2.compareTo(o1);
-                        }
-                    }
+                if (o1.charAt(1) != o2.charAt(1)) {
+                    result = o2.compareTo(o1);
                 } else {
-                    int length = map.get(o1).length > map.get(o2).length ? map.get(o2).length : map.get(o1).length;
-                    for (int i = 0; i < length; i++) {
-                        if (!map.get(o1)[i].equals(map.get(o2)[i])) {
-                            result = o2.compareTo(o1);
-                        }
-                    }
+                    result = o1.length() > o2.length() ? 1 : -1;
                 }
                 return result;
             }
         });
-        String[] result = new String[list.size()];
-        result = list.toArray(result);
+        for (String str : temp) {
+            set.add(str);
+        }
+        String[] result = set.toArray(new String[set.size()]);
         return result;
     }
 
