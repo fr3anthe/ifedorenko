@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * Class ArrayContainer.
  * @param <E> generic
  */
-public class ArrayContainer<E> implements SimpleContainer {
+public class ArrayContainer<E> implements SimpleContainer<E> {
     /**
      * @param DEFAULT_CAPACITY default size of array
      */
@@ -49,15 +49,15 @@ public class ArrayContainer<E> implements SimpleContainer {
 
     /**
      * Method add.
-     * @param o object for adding
+     * @param e object for adding
      */
     @Override
-    public void add(Object o) {
+    public void add(E e) {
         if (index >= objects.length) {
             objects = Arrays.copyOf(objects, objects.length * 2);
-            objects[index++] = o;
+            objects[index++] = e;
         } else {
-            objects[index++] = o;
+            objects[index++] = e;
         }
     }
 
@@ -95,7 +95,7 @@ public class ArrayContainer<E> implements SimpleContainer {
              */
             @Override
             public boolean hasNext() {
-                return position < objects.length;
+                return position < index;
             }
 
             /**
