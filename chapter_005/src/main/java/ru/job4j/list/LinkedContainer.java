@@ -69,6 +69,16 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
     }
 
     /**
+     * Method get.
+     * @param link link
+     * @return item.
+     */
+    public E get(Link<E> link) {
+        E result = link.item;
+        return result;
+    }
+
+    /**
      * Iterator.
      * @return iterator
      */
@@ -92,6 +102,50 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
             }
         };
         return iterator;
+    }
+
+    /**
+     * Method delete first link.
+     */
+    public void deleteFirst() {
+        if (first == last) {
+            first = null;
+            last = null;
+        } else {
+            first = first.next;
+            first.prev = null;
+            size--;
+        }
+    }
+
+    /**
+     * Method delete last link.
+     */
+    public void deleteLast() {
+        if (last == first) {
+            last = null;
+            first = null;
+        } else {
+            last = last.prev;
+            last.next = null;
+            size--;
+        }
+    }
+
+    /**
+     * Getter First.
+     * @return First link
+     */
+    public Link<E> getFirst() {
+        return first;
+    }
+
+    /**
+     * Getter Last.
+     * @return Last link
+     */
+    public Link<E> getLast() {
+        return last;
     }
 
     /**
