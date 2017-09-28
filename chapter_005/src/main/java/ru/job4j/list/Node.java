@@ -13,6 +13,10 @@ public class Node<T> {
      * @next next link
      */
     private Node<T> next;
+    /**
+     * @param count how many object Node was create
+     */
+    private static int count = 0;
 
     /**
      * Constructor.
@@ -20,6 +24,7 @@ public class Node<T> {
      */
     public Node(T value) {
         this.value = value;
+        count++;
     }
 
     /**
@@ -28,6 +33,14 @@ public class Node<T> {
      */
     public Node<T> getNext() {
         return next;
+    }
+
+    /**
+     * Getter count.
+     * @return count
+     */
+    public static int getCount() {
+        return count;
     }
 
     /**

@@ -1,7 +1,5 @@
 package ru.job4j.list;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class findCycle.
@@ -15,17 +13,13 @@ public class FindCycle {
     boolean hasCycle(Node first) {
         boolean result = false;
         Node temp = first.getNext();
-        List<Node> list = new ArrayList();
-        list.add(first);
-        while (true) {
-            if (temp.getNext() == null) {
-                break;
-            } else if (list.contains(temp)) {
+        int count = 0;
+        while (temp != null) {
+            count++;
+            temp = temp.getNext();
+            if (count - 1 > Node.getCount()) {
                 result = true;
                 break;
-            } else {
-                list.add(temp);
-                temp = temp.getNext();
             }
         }
         return result;

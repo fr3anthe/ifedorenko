@@ -24,7 +24,7 @@ public class FindCycleTest {
         first.setNext(two);
         two.setNext(third);
         third.setNext(four);
-        four.setNext(two);
+        four.setNext(first);
         boolean result = fc.hasCycle(first);
 
         assertThat(result, is(true));
