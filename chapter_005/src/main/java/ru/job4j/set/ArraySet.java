@@ -8,43 +8,20 @@ import java.util.NoSuchElementException;
  * Class ArraySet.
  * @param <E>
  */
-public class ArraySet<E> implements SimpleSet<E> {
+public class ArraySet<E> extends AbstractArray implements SimpleSet<E> {
     /**
-     * @param DEFAULT_CAPACITY default size of array
+     * Base constructor.
      */
-    private static final int DEFAULT_CAPACITY = 10;
-    /**
-     * @param EMPTY_ELEMENTDATA size array when initialize by null
-     */
-    private static final Object[] EMPTY_ELEMENTDATA = {};
-    /**
-     * @param objects our container
-     */
-    private Object[] objects;
-    /**
-     * @param index position in array
-     */
-    private int index = 0;
+    public ArraySet() {
+        super();
+    }
 
     /**
      * Constructor.
      * @param initialCapacity start size.
      */
     public ArraySet(int initialCapacity) {
-        if (initialCapacity > 0) {
-            this.objects = new Object[initialCapacity];
-        } else if (initialCapacity == 0) {
-            this.objects = EMPTY_ELEMENTDATA;
-        } else {
-            throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
-        }
-    }
-
-    /**
-     * Default constructor.
-     */
-    public ArraySet() {
-        this.objects = new Object[DEFAULT_CAPACITY];
+        super(initialCapacity);
     }
 
     /**
@@ -54,12 +31,7 @@ public class ArraySet<E> implements SimpleSet<E> {
     @Override
     public void add(E e) {
         if (checkDuplicate(e)) {
-            if (index >= objects.length) {
-                objects = Arrays.copyOf(objects, objects.length * 2);
-                objects[index++] = e;
-            } else {
-                objects[index++] = e;
-            }
+            super.put(e);
         }
     }
 
@@ -76,42 +48,6 @@ public class ArraySet<E> implements SimpleSet<E> {
                 break;
             }
         }
-        return result;
-    }
-
-    /**
-     * Iterator.
-     * @return iterator
-     */
-    @Override
-    public Iterator<E> iterator() {
-        Iterator<E> result = new Iterator<E>() {
-            /**
-             * @param position position in array
-             */
-            private int position = 0;
-
-            /**
-             * Method hasNext.
-             * @return result
-             */
-            @Override
-            public boolean hasNext() {
-                return position < index;
-            }
-
-            /**
-             * Method next.
-             * @return object
-             */
-            @Override
-            public E next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return (E) objects[position++];
-            }
-        };
         return result;
     }
 
