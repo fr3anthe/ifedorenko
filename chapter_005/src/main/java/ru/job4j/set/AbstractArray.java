@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Class AbstractArray.
+ * @param <E> generic
+ */
 public abstract class AbstractArray<E> {
     /**
      * @param DEFAULT_CAPACITY default size of array

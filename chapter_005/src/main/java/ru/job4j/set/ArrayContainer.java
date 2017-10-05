@@ -1,10 +1,5 @@
-package ru.job4j.list;
+package ru.job4j.set;
 
-import ru.job4j.set.AbstractArray;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * Class ArrayContainer.

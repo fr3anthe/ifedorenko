@@ -1,5 +1,7 @@
 package ru.job4j.list;
 
+import ru.job4j.set.LinkedContainer;
+
 /**
  * Class SimpleQueue.
  * @param <T> generic

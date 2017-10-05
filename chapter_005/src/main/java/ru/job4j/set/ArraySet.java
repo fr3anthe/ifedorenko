@@ -1,9 +1,5 @@
 package ru.job4j.set;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * Class ArraySet.
  * @param <E>
