@@ -43,4 +43,45 @@ public class TreeTest {
         assertThat(result, is(4));
     }
 
+    /**
+     * Test 3.
+     */
+    @Test
+    public void whenParentHasNotMostTwoChildrenThenResultTrue() {
+        Tree<Integer> tree = new Tree<>(0);
+
+        tree.add(0, 1);
+        tree.add(0, 2);
+        tree.add(1, 11);
+        tree.add(1, 12);
+        tree.add(2, 21);
+        tree.add(2, 22);
+
+        boolean result = tree.isBinary();
+
+        assertThat(result, is(true));
+    }
+
+    /**
+     * Test 4.
+     */
+    @Test
+    public void whenParentHasMostTwoChildrenThenResultFalse() {
+        Tree<Integer> tree = new Tree<>(0);
+
+        tree.add(0, 1);
+        tree.add(0, 2);
+        tree.add(1, 11);
+        tree.add(1, 12);
+        tree.add(2, 21);
+        tree.add(2, 22);
+        tree.add(22, 220);
+        tree.add(22, 221);
+        tree.add(22, 222);
+
+        boolean result = tree.isBinary();
+
+        assertThat(result, is(false));
+    }
+
 }
