@@ -49,9 +49,11 @@ public class SimpleMap<K, V> implements Iterable {
         if (map[index] == null) {
             map[index] = new Node(key, value);
             size++;
+            result = true;
         } else if (map[index] != null) {
-            if (map[index].key == key) {
+            if (map[index].key.equals(key)) {
                 map[index].value = value;
+                result = true;
             }
         }
          return result;
