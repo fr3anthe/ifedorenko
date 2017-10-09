@@ -17,6 +17,7 @@ public class ArraySetTest {
         ArraySet<String> as = new ArraySet<>(3);
 
         as.add("1");
+        as.put(1);
         as.add("2");
         as.add("1");
         as.add("3");
