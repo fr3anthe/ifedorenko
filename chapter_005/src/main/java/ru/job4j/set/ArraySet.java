@@ -39,7 +39,7 @@ public class ArraySet<E> extends AbstractArray implements SimpleSet<E> {
     public boolean checkDuplicate(E e) {
         boolean result = true;
         for (Object ob : objects) {
-            if (e == ob) {
+            if (e.equals(ob)) {
                 result = false;
                 break;
             }

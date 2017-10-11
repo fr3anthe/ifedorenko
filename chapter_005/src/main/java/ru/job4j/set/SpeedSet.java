@@ -1,12 +1,13 @@
 package ru.job4j.set;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Class SpeedSet.
  * @param <E> generic
  */
-public class SpeedSet<E extends Comparable<E>> extends  AbstractArray implements  SimpleSet<E> {
+public class SpeedSet<E extends Comparable<E>> extends  AbstractArray implements  SimpleSet<E>, Comparator<E>{
     /**
      * Base constructor.
      */
@@ -36,7 +37,7 @@ public class SpeedSet<E extends Comparable<E>> extends  AbstractArray implements
             int right = index - 1;
             while (left < right) {
                 int mid = (left + right) / 2;
-                int eq = e.compareTo((E) objects[mid]);
+                int eq = compare(e, (E) objects[mid]);
                 if (eq == 0) {
                     break;
                 } else if (eq > 0) {
@@ -50,7 +51,7 @@ public class SpeedSet<E extends Comparable<E>> extends  AbstractArray implements
                 objects[0] = e;
                 index++;
             } else if (left == right) {
-                int eq = e.compareTo((E) objects[left]);
+                int eq = compare(e, (E) objects[left]);
                 if (eq < 0) {
                     int count = index - left;
                     System.arraycopy(objects, left, objects, left + 1, count);
@@ -67,6 +68,15 @@ public class SpeedSet<E extends Comparable<E>> extends  AbstractArray implements
             }
         } else {
             objects[index++] = e;
+        }
+    }
+
+    @Override
+    public int compare(E o1, E o2) {
+        if (o1.equals(o2)) {
+            return 0;
+        } else {
+            return o1.compareTo(o2);
         }
     }
 }
