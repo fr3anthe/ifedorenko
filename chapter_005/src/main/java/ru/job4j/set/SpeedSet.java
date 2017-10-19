@@ -7,7 +7,7 @@ import java.util.Comparator;
  * Class SpeedSet.
  * @param <E> generic
  */
-public class SpeedSet<E extends Comparable<E>> extends  AbstractArray implements  SimpleSet<E>, Comparator<E>{
+public class SpeedSet<E extends Comparable<E>> extends  AbstractArray implements  SimpleSet<E>, Comparator<E> {
     /**
      * Base constructor.
      */
