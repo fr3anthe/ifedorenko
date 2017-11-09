@@ -27,7 +27,7 @@ public class CalculateTest {
 
         sc.run();
 
-        String excepted = "Spaces: 3";
+        String excepted = "Spaces: 3\r\n";
         assertThat(os.toString(), is(excepted));
     }
 
@@ -44,7 +44,7 @@ public class CalculateTest {
 
         wc.run();
 
-        String excepted = "Words: 4";
+        String excepted = "Words: 4\r\n";
         assertThat(os.toString(), is(excepted));
     }
 

@@ -6,6 +6,7 @@ package ru.job4j.threads;
 public class SpaceCount extends WordCheck {
     /**
      * Constructor.
+     *
      * @param word word for check
      */
     public SpaceCount(String word) {
@@ -23,7 +24,7 @@ public class SpaceCount extends WordCheck {
                 countS++;
             }
         }
-        System.out.print("Spaces: " + countS);
+        System.out.println("Spaces: " + countS);
     }
 }
 

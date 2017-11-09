@@ -1,10 +1,7 @@
 package ru.job4j.test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,6 +10,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
+
 
 /**
  * Class ParseSax.
@@ -103,8 +101,7 @@ public class ParseSax extends DefaultHandler {
      */
     public void print() {
         for (HashMap<Integer, Order> map : orders.values()) {
-            List<Order> temp = new ArrayList<>(map.values());
-            Book book = new Book(temp);
+            Book book = new Book(map.values());
             book.calculate();
         }
     }
@@ -114,12 +111,8 @@ public class ParseSax extends DefaultHandler {
      * @param order order for adding
      */
     public void add(Order order) {
-        HashMap<Integer, Order> list = orders.get(order.book);
-        if (list == null) {
-            list = new HashMap<Integer, Order>();
-            orders.put(order.book, list);
-        }
-        list.put(order.id, order);
+        orders.putIfAbsent(order.book, new HashMap<Integer, Order>());
+        orders.get(order.book).put(order.id, order);
     }
 
     /**
@@ -153,10 +146,6 @@ public class ParseSax extends DefaultHandler {
      */
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         ParseSax ps = new ParseSax();
-        long time = ps.init();
-        for (int i = 0; i < 50; i++) {
-            time = time + ps.init();
-        }
-        System.out.println(time / 50);
+        ps.init();
     }
 }

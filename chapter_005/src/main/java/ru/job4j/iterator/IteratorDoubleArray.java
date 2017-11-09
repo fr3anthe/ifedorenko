@@ -50,7 +50,7 @@ public class IteratorDoubleArray implements Iterator {
             throw new NoSuchElementException();
         }
         int result = values[row][col++];
-        if (col == values[0].length) {
+        if (col == values[row].length) {
             row++;
             col = 0;
         }

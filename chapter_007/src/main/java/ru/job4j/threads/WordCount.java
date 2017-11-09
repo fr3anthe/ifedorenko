@@ -19,17 +19,23 @@ public class WordCount extends WordCheck {
     public void run() {
         int countW = 0;
         int count = 0;
-        for (int i = 0; i < this.str.length; i++) {
-            if (this.str[i] != ' ') {
+        int index = 0;
+        int lenght = this.str.length;
+        while (!Thread.currentThread().isInterrupted()) {
+            if (this.str[index] != ' ') {
                 count++;
-                if (i == this.str.length - 1) {
+                if (index == this.str.length - 1) {
                     countW++;
                 }
-            } else if (this.str[i] == ' ' && count > 0) {
+            } else if (this.str[index] == ' ' && count > 0) {
                 countW++;
                 count = 0;
             }
+            if (index == lenght - 1) {
+                System.out.println("Words: " + countW);
+                break;
+            }
+            index++;
         }
-        System.out.print("Words: " + countW);
     }
 }
