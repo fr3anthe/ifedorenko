@@ -13,8 +13,15 @@ public class Calculate {
      * @throws IOException exception
      */
     public void calc(String string) throws IOException {
-        new Thread(new SpaceCount(string)).start();
-        new Thread(new WordCount(string)).start();
+        System.out.println("Программа для подсчета слов и пробелов в выражении:");
+        Thread space = new Thread(new SpaceCount(string));
+        Thread word = new Thread(new WordCount(string));
+        space.start();
+        word.start();
+        while (space.isAlive() || word.isAlive()) {
+            continue;
+        }
+        System.out.println("Программа завершила свою работу");
     }
 
     /**
