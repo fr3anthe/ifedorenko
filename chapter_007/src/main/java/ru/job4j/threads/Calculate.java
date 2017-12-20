@@ -18,8 +18,11 @@ public class Calculate {
         Thread word = new Thread(new WordCount(string));
         space.start();
         word.start();
-        while (space.isAlive() || word.isAlive()) {
-            continue;
+        try {
+            word.join();
+            space.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         System.out.println("Программа завершила свою работу");
     }
