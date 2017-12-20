@@ -16,9 +16,11 @@ public class CharCheck {
         cc.start();
         time.start();
 
-
-        while (cc.isAlive() || time.isAlive()) {
-            continue;
+        try {
+            time.join();
+            cc.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         System.out.println("Программа завершила работу");
     }

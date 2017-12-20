@@ -19,20 +19,15 @@ public class CountChar extends WordCheck {
     @Override
     public void run() {
         int countS = 0;
-        try {
             for (int i = 0; i < this.str.length; i++) {
                 if (!Thread.currentThread().isInterrupted()) {
                     if (this.str[i] != ' ') {
                         countS++;
                     }
                 } else {
-                    throw new InterruptedException();
+                    System.out.println("Выполнение программы остановлено");
                 }
             }
             System.out.println("Chars: " + countS);
-        } catch (InterruptedException e) {
-            System.out.println("Выполнение программы остановлено");
-        }
-
     }
 }
