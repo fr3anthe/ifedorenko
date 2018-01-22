@@ -25,7 +25,8 @@ public class CountChar extends WordCheck {
                         countS++;
                     }
                 } else {
-                    System.out.println("Выполнение программы остановлено");
+                    System.out.println("Выполнение программы остановлено!");
+                    break;
                 }
             }
             System.out.println("Chars: " + countS);
