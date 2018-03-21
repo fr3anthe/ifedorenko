@@ -229,7 +229,7 @@ public class Frog {
      * @param xJump x for change current position
      * @param yJump y for change current position
      * @param count number by jump
-     * @return
+     * @return result
      */
     public boolean back(int xCurr, int yCurr, int xJump, int yJump, int count) {
         boolean result = false;
@@ -251,6 +251,11 @@ public class Frog {
         private int x;
         private int y;
 
+        /**
+         * Constructor
+         * @param x coord x
+         * @param y coord y
+         */
         public Point(int x, int y) {
             this.x = x;
             this.y = y;

@@ -12,6 +12,10 @@ public class CountTest {
     private class ThreadCount extends Thread {
         private final Count count;
 
+        /**
+         * Constructor
+         * @param count object Class
+         */
         private ThreadCount(final Count count) {
             this.count = count;
         }
@@ -22,6 +26,10 @@ public class CountTest {
         }
     }
 
+    /**
+     * Method for testing
+     * @throws InterruptedException exception
+     */
     @Test
     public void whenExecute2ThreadThen2() throws InterruptedException {
         final Count count = new Count();

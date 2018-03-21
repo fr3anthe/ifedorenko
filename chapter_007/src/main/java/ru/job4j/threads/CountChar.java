@@ -1,6 +1,5 @@
 package ru.job4j.threads;
 
-import java.util.TimerTask;
 
 public class CountChar extends WordCheck {
 

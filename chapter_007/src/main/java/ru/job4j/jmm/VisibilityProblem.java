@@ -25,6 +25,10 @@ public class VisibilityProblem {
         this.flag = flag;
     }
 
+    /**
+     * Method main
+     * @param args args
+     */
     public static void main(String[] args) {
         VisibilityProblem vp = new VisibilityProblem();
 
