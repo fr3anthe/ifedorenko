@@ -1,11 +1,19 @@
 package ru.job4j.set;
 
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * Class ArrayContainer.
  * @param <E> generic
  */
+@ThreadSafe
 public class ArrayContainer<E> extends AbstractArray implements SimpleContainer<E> {
+    /**
+     * @param obj for sync
+     */
+    private static final Object obj = new Object();
+
     /**
      * Base constructor.
      */
@@ -23,7 +31,9 @@ public class ArrayContainer<E> extends AbstractArray implements SimpleContainer<
 
     @Override
     public void add(E e) {
-        super.put(e);
+        synchronized (obj) {
+            super.put(e);
+        }
     }
 
     /**
@@ -33,12 +43,14 @@ public class ArrayContainer<E> extends AbstractArray implements SimpleContainer<
      */
     @Override
     public E get(int index) {
-        E result = null;
-        if (index >= super.objects.length) {
-            throw new IndexOutOfBoundsException();
-        } else {
-            result = (E) objects[index];
+        synchronized (obj) {
+            E result = null;
+            if (index >= super.objects.length) {
+                throw new IndexOutOfBoundsException();
+            } else {
+                result = (E) objects[index];
+            }
+            return result;
         }
-        return result;
     }
 }

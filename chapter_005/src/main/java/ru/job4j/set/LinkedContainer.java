@@ -1,18 +1,28 @@
 package ru.job4j.set;
 
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * Class LinkedContainer.
  * @param <E> generic
  */
+@ThreadSafe
 public class LinkedContainer<E> extends AbstractLink<E> implements SimpleContainer<E> {
+    /**
+     * @param obj for sync
+     */
+    private static final Object obj = new Object();
+
     /**
      * Method add.
      * @param e element for adding
      */
     @Override
     public void add(E e) {
-        super.put(e);
+        synchronized (obj) {
+            super.put(e);
+        }
     }
 
     /**
@@ -22,25 +32,27 @@ public class LinkedContainer<E> extends AbstractLink<E> implements SimpleContain
      */
     @Override
     public E get(int index) {
-        if (!(index >= 0 && index < size)) {
-            throw new IndexOutOfBoundsException();
-        }
-        Node<E> temp;
-        E result;
-        if (index < (size >> 1)) {
-            temp = first;
-            for (int i = 0; i < index; i++) {
-                temp = temp.next;
+        synchronized (obj) {
+            if (!(index >= 0 && index < size)) {
+                throw new IndexOutOfBoundsException();
             }
-            result = temp.item;
-        } else {
-            temp = last;
-            for (int i = size - 1; i > index; i--) {
-                temp = last.prev;
+            Node<E> temp;
+            E result;
+            if (index < (size >> 1)) {
+                temp = first;
+                for (int i = 0; i < index; i++) {
+                    temp = temp.next;
+                }
+                result = temp.item;
+            } else {
+                temp = last;
+                for (int i = size - 1; i > index; i--) {
+                    temp = last.prev;
+                }
+                result = temp.item;
             }
-            result = temp.item;
+            return result;
         }
-        return result;
     }
 
     /**
@@ -49,7 +61,9 @@ public class LinkedContainer<E> extends AbstractLink<E> implements SimpleContain
      * @return item.
      */
     public E get(Node<E> link) {
-        E result = link.item;
-        return result;
+        synchronized (obj) {
+            E result = link.item;
+            return result;
+        }
     }
 }
