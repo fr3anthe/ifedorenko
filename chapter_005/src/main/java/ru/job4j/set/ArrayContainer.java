@@ -12,7 +12,7 @@ public class ArrayContainer<E> extends AbstractArray implements SimpleContainer<
     /**
      * @param obj for sync
      */
-    private static final Object obj = new Object();
+    private static final Object OBJ = new Object();
 
     /**
      * Base constructor.
@@ -31,7 +31,7 @@ public class ArrayContainer<E> extends AbstractArray implements SimpleContainer<
 
     @Override
     public void add(E e) {
-        synchronized (obj) {
+        synchronized (OBJ) {
             super.put(e);
         }
     }
@@ -43,7 +43,7 @@ public class ArrayContainer<E> extends AbstractArray implements SimpleContainer<
      */
     @Override
     public E get(int index) {
-        synchronized (obj) {
+        synchronized (OBJ) {
             E result = null;
             if (index >= super.objects.length) {
                 throw new IndexOutOfBoundsException();

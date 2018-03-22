@@ -12,7 +12,7 @@ public class LinkedContainer<E> extends AbstractLink<E> implements SimpleContain
     /**
      * @param obj for sync
      */
-    private static final Object obj = new Object();
+    private static final Object OBJ = new Object();
 
     /**
      * Method add.
@@ -20,7 +20,7 @@ public class LinkedContainer<E> extends AbstractLink<E> implements SimpleContain
      */
     @Override
     public void add(E e) {
-        synchronized (obj) {
+        synchronized (OBJ) {
             super.put(e);
         }
     }
@@ -32,7 +32,7 @@ public class LinkedContainer<E> extends AbstractLink<E> implements SimpleContain
      */
     @Override
     public E get(int index) {
-        synchronized (obj) {
+        synchronized (OBJ) {
             if (!(index >= 0 && index < size)) {
                 throw new IndexOutOfBoundsException();
             }
@@ -61,7 +61,7 @@ public class LinkedContainer<E> extends AbstractLink<E> implements SimpleContain
      * @return item.
      */
     public E get(Node<E> link) {
-        synchronized (obj) {
+        synchronized (OBJ) {
             E result = link.item;
             return result;
         }
