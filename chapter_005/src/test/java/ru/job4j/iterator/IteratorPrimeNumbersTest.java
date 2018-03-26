@@ -36,11 +36,11 @@ public class IteratorPrimeNumbersTest {
     @Test
     public void whenArrayHaveThreePrimeValuesThenSizeOfListIs3() {
         List<Integer> result = new ArrayList<>();
-        Iterator iterator = new IteratorPrimeNumbers(new int[] {1, 3, 4, 11, 10, 12, 15, 19});
+        Iterator iterator = new IteratorPrimeNumbers(new int[] {1, 2, 3, 4, 11, 10, 12, 15, 19});
         while (iterator.hasNext()) {
             result.add((Integer) iterator.next());
         }
-        List<Integer> expect = Arrays.asList(3, 11, 19);
+        List<Integer> expect = Arrays.asList(2, 3, 11, 19);
         assertThat(result, is(expect));
     }
 }

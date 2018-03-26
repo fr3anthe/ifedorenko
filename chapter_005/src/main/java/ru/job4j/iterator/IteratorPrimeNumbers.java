@@ -79,7 +79,7 @@ public class IteratorPrimeNumbers implements Iterator {
      */
     private boolean checkPrime(int value) {
         boolean result = true;
-        if (value == 0 || value == 1 || value % 2 == 0) {
+        if (value == 0 || value == 1 || (value % 2 == 0 && value != 2)) {
             result = false;
         } else {
             for (int i = 3; i < value / 2; i++) {
