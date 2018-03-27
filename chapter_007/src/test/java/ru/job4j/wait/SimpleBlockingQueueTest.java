@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 
 public class SimpleBlockingQueueTest {
+
     private SimpleBlockingQueue<Integer> sbq;
 
     private Thread producer = new Thread() {

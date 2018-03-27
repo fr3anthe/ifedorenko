@@ -27,8 +27,8 @@ public class CountCharTest {
         Runnable sc = new CountChar(word);
 
         sc.run();
-
-        String excepted = "Chars: 10\r\n";
+        final String line = System.getProperty("line.separator");
+        String excepted = String.format("Chars: 10%s", line);
         assertThat(os.toString(), is(excepted));
     }
 }

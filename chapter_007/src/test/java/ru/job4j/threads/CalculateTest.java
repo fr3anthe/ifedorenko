@@ -26,8 +26,8 @@ public class CalculateTest {
         Runnable sc = new SpaceCount(word);
 
         sc.run();
-
-        String excepted = "Spaces: 3\r\n";
+        final String line = System.getProperty("line.separator");
+        String excepted = String.format("Spaces: 3%s", line);
         assertThat(os.toString(), is(excepted));
     }
 
@@ -39,12 +39,13 @@ public class CalculateTest {
         OutputStream os = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(os);
         System.setOut(ps);
+
         String word = "Закрыло пеленой чреду воспоминаний";
         Runnable wc = new WordCount(word);
 
         wc.run();
-
-        String excepted = "Words: 4\r\n";
+        final String line = System.getProperty("line.separator");
+        String excepted = String.format("Words: 4%s", line);
         assertThat(os.toString(), is(excepted));
     }
 
@@ -65,10 +66,10 @@ public class CalculateTest {
             continue;
         }
         System.out.println("End");
-
-        String excepted1 = "Start\r\n";
-        String excepted2 = "Spaces: 3\r\n";
-        String excepted3 = "End\r\n";
+        final String line = System.getProperty("line.separator");
+        String excepted1 = String.format("Start%s", line);
+        String excepted2 = String.format("Spaces: 3%s", line);
+        String excepted3 = String.format("End%s", line);
         assertThat(os.toString(), is(excepted1 + excepted2 + excepted3));
     }
 
@@ -89,10 +90,10 @@ public class CalculateTest {
             continue;
         }
         System.out.println("End");
-
-        String excepted1 = "Start\r\n";
-        String excepted2 = "Words: 4\r\n";
-        String excepted3 = "End\r\n";
+        final String line = System.getProperty("line.separator");
+        String excepted1 = String.format("Start%s", line);
+        String excepted2 = String.format("Words: 4%s", line);
+        String excepted3 = String.format("End%s", line);
         assertThat(os.toString(), is(excepted1 + excepted2 + excepted3));
     }
 

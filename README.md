@@ -1,4 +1,4 @@
+[![Build Status](https://travis-ci.org/fr3anthe/ifedorenko.svg?branch=master)](https://travis-ci.org/fr3anthe/ifedorenko)
+[![COverage Status](https://codecov.io/gh/fr3anthe/ifedorenko/branch/master/graph/badge.svg)](https://codecov.io/gh/fr3anthe/ifedorenko)
 # ifedorenko
-http://job4j.ru
-
-Привет! Меня зовут Игорь. Я пройду этот курс за 8, мб 9 месяцев.
+in progress...
