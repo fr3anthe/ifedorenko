@@ -1,5 +1,7 @@
 package ru.job4j.set;
 
+import java.util.Objects;
+
 /**
  * Class ArraySet.
  * @param <E>
@@ -39,7 +41,7 @@ public class ArraySet<E> extends AbstractArray implements SimpleSet<E> {
     public boolean checkDuplicate(E e) {
         boolean result = true;
         for (Object ob : objects) {
-            if (e.equals(ob)) {
+            if (Objects.equals(e, ob)) {
                 result = false;
                 break;
             }

@@ -18,7 +18,7 @@ public class ArraySetTest {
 
         as.add("1");
         as.add("2");
-        as.add("1");
+        as.add(null);
         as.add("3");
         as.add("4");
         as.add("3");
