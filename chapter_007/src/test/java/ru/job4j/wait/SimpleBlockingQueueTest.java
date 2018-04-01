@@ -65,7 +65,7 @@ public class SimpleBlockingQueueTest {
         consumer.start();
         producer.join();
         consumer.join();
-        int result = sbq.getQueue().size();
+        int result = sbq.size();
         assertThat(result, is(4));
     }
 

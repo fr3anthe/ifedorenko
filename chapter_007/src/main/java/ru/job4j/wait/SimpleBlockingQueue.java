@@ -9,8 +9,16 @@ import java.util.Queue;
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
-    private Queue<T> queue = new LinkedList<>();
-    private int length = 5;
+    private final Queue<T> queue;
+    private final int length;
+
+    /**
+     * Constructor.
+     */
+    public SimpleBlockingQueue() {
+        this.queue = new LinkedList<>();
+        length = 5;
+    }
 
     /**
      * Method for add in queue.
@@ -40,11 +48,12 @@ public class SimpleBlockingQueue<T> {
     }
 
     /**
-     * Getter.
-     * @return queue
+     * Method size.
+     * @return queue size
      */
-    public Queue<T> getQueue() {
-        return queue;
+    public synchronized int size() {
+        return queue.size();
+
     }
 }
 
