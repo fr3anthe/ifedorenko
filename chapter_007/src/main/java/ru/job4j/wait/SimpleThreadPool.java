@@ -18,6 +18,9 @@ public class SimpleThreadPool {
         this.threadCount = Runtime.getRuntime().availableProcessors();
     }
 
+    /**
+     * Method for create ans start all threads.
+     */
     public void start() {
         for (int i = 0; i < threadCount; i++) {
             ThreadForPool tfp = new ThreadForPool();
