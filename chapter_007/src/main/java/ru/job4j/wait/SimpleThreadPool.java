@@ -16,6 +16,9 @@ public class SimpleThreadPool {
     public SimpleThreadPool() {
         this.tasks = new SimpleBlockingQueue<Runnable>();
         this.threadCount = Runtime.getRuntime().availableProcessors();
+    }
+
+    public void start() {
         for (int i = 0; i < threadCount; i++) {
             ThreadForPool tfp = new ThreadForPool();
             tfp.setName("Thread - " + i);
@@ -26,6 +29,7 @@ public class SimpleThreadPool {
 
     /**
      * Method add.
+     *
      * @param task for adding.
      * @throws Exception exception
      */
@@ -46,6 +50,7 @@ public class SimpleThreadPool {
 
     /**
      * Getter.
+     *
      * @return our queue
      */
     public SimpleBlockingQueue<Runnable> getTasks() {
@@ -58,20 +63,20 @@ public class SimpleThreadPool {
     class ThreadForPool extends Thread {
         @Override
         public void run() {
-            try {
-                while (true) {
-
-                    System.out.println(Thread.currentThread().getName() + " is ready to work");
-                    Runnable runnable = tasks.peek();
-                    System.out.println(Thread.currentThread().getName() + " is executing task");
-                    runnable.run();
-                    if (poolShutDownInitiated && tasks.size() == 0) {
-                        this.interrupt();
-                        Thread.sleep(1);
-                    }
+            while (true) {
+                System.out.println(Thread.currentThread().getName() + " is ready to work");
+                Runnable runnable = null;
+                try {
+                    runnable = tasks.peek();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            } catch (InterruptedException e) {
-                System.out.println(Thread.currentThread().getName() + " has been STOPPED.");
+                System.out.println(Thread.currentThread().getName() + " is executing task");
+                runnable.run();
+                if (poolShutDownInitiated && tasks.size() == 0) {
+                    System.out.println(Thread.currentThread().getName() + " has been STOPPED.");
+                    break;
+                }
             }
         }
     }

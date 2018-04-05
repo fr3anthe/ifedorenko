@@ -31,6 +31,7 @@ public class SimpleThreadPoolTest {
     @Test
     public void whenAddTaskInPoolAndCompletedThisTaskThenReturnSizeofQueueIsNull() throws Exception {
         stp = new SimpleThreadPool();
+        stp.start();
         stp.add(task);
         stp.shutdown();
         Thread.currentThread().join(100);
@@ -44,6 +45,7 @@ public class SimpleThreadPoolTest {
     @Test
     public void whenTrustAddNewTaskInStoppedPoolThenReturnError() {
         stp = new SimpleThreadPool();
+        stp.start();
         stp.shutdown();
         try {
             stp.add(task);
