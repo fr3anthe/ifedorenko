@@ -8,7 +8,9 @@ public class SimpleLock {
 
     @GuardedBy("this")
     private boolean lockState = false;
+    @GuardedBy("this")
     private Thread lockedBy = null;
+    @GuardedBy("this")
     private int count = 0;
 
     /**
@@ -34,7 +36,7 @@ public class SimpleLock {
             count--;
             if (count == 0) {
                 lockState = false;
-                notify();
+                notifyAll();
 
             }
         }
@@ -44,7 +46,7 @@ public class SimpleLock {
      * Getter LockState.
      * @return result
      */
-    public boolean getLockState() {
+    public synchronized boolean getLockState() {
         return lockState;
     }
 }
