@@ -15,15 +15,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class FindFiles extends SimpleFileVisitor<Path> {
 
-    private List<String> ext;
-    private Queue<Path> files;
+    private final List<String> ext;
+    private final BlockingQueue<Path> files;
 
     /**
      * Constructor.
      * @param ext files extensions
      * @param files queue for adding files by extensions
      */
-    public FindFiles(List<String> ext, Queue<Path> files) {
+    public FindFiles(List<String> ext, BlockingQueue<Path> files) {
         this.ext = ext;
         this.files = files;
     }
@@ -33,7 +33,11 @@ public class FindFiles extends SimpleFileVisitor<Path> {
         if (attr.isRegularFile()) {
             int temp = file.toString().lastIndexOf('.');
             if (ext.contains(file.toString().substring(temp + 1))) {
-                files.add(file);
+                try {
+                    files.put(file);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return FileVisitResult.CONTINUE;

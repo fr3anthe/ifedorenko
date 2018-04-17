@@ -1,29 +1,41 @@
 package ru.job4j.wait;
 
-import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 @ThreadSafe
 public class ParallelSearch {
+    /**
+     * @param root start folder for searching
+     */
     private final String root;
+    /**
+     * @param text text for searching
+     */
     private final String text;
+    /**
+     * @param exts file extension
+     */
     private final List<String> exts;
+    /**
+     * @param finish checking the status of the search thread
+     */
     private volatile boolean finish = false;
-
-    @GuardedBy("this")
-    private final Queue<Path> files = new LinkedList<>();
-
-    @GuardedBy("this")
+    /**
+     * @param paths paths all required files
+     */
     private final List<String> paths = new ArrayList<>();
+    /**
+     * @param files temporary storage for uncheked files
+     */
+    private final BlockingQueue<Path> files = new LinkedBlockingQueue<>();
+
 
     /**
      * Constructor.
@@ -42,10 +54,11 @@ public class ParallelSearch {
      * @throws InterruptedException exception
      */
     public void init() throws InterruptedException {
+
         Thread search = new Thread() {
-            private FindFiles ff = new FindFiles(exts, files);
-            private File file = new File(root);
-            private Path path = file.toPath();
+            private final FindFiles ff = new FindFiles(exts, files);
+            private final File file = new File(root);
+            private final Path path = file.toPath();
 
             @Override
             public void run() {
@@ -55,28 +68,24 @@ public class ParallelSearch {
                     e.printStackTrace();
                 }
                 finish = true;
+
             }
         };
 
-        Thread read = new Thread() {
-
-            @Override
-            public void run() {
-                while (!finish || !files.isEmpty()) {
-                    if (files.size() > 0) {
-                        try {
-                            Path path = files.poll();
-                            String temp = new String(Files.readAllBytes(path));
-                            if (temp.contains(text)) {
-                                paths.add(path.toString());
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+        Thread read = new Thread(() -> {
+            while (!finish || !files.isEmpty()) {
+                try {
+                    Path path = files.take();
+                    String temp = new String(Files.readAllBytes(path));
+                    if (temp.contains(text)) {
+                        paths.add(path.toString());
                     }
+
+                } catch (InterruptedException | IOException e) {
+                    e.printStackTrace();
                 }
             }
-        };
+        });
 
         search.start();
         read.start();
@@ -88,7 +97,7 @@ public class ParallelSearch {
      * Getter.
      * @return return list by paths
      */
-    synchronized List<String>  result() {
+     public List<String>  result() {
         return this.paths;
     }
 }
