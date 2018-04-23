@@ -12,7 +12,7 @@ public class Order {
          * @param SELL sell
          * @param BUY buy
          */
-        SELL, BUY;
+        SELL, BUY
     }
 
     /**
