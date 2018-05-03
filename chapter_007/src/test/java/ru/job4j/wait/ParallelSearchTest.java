@@ -25,17 +25,4 @@ public class ParallelSearchTest {
         System.out.println(ps.result().size());
         assertThat(result, is(ps.result().size()));
     }
-
-    /**
-     * Method for testing path.
-     * @throws InterruptedException exception
-     */
-    @Test
-    public void whenFoundMatchThenShowPathByFiles() throws InterruptedException {
-        text = "mama";
-        ParallelSearch ps = new ParallelSearch(root, text, ext);
-        ps.init();
-        String result = "FolderForTests\\ParallelSearch\\Mama\\mama.txt";
-        assertThat(result, is(ps.result().get(0)));
-    }
 }
