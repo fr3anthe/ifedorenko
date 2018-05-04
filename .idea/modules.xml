@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/chapter_001/chapter_001.iml" filepath="$PROJECT_DIR$/chapter_001/chapter_001.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chapter_002/chapter_002.iml" filepath="$PROJECT_DIR$/chapter_002/chapter_002.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chapter_003/chapter_003.iml" filepath="$PROJECT_DIR$/chapter_003/chapter_003.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chapter_005/chapter_005.iml" filepath="$PROJECT_DIR$/chapter_005/chapter_005.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chapter_007/chapter_007.iml" filepath="$PROJECT_DIR$/chapter_007/chapter_007.iml" />
+      <module fileurl="file://$PROJECT_DIR$/1.1_Base/1.1_Base.iml" filepath="$PROJECT_DIR$/1.1_Base/1.1_Base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/1.2_OOP/1.2_OOP.iml" filepath="$PROJECT_DIR$/1.2_OOP/1.2_OOP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/1.3_Collections_Lite/1.3_Collections_Lite.iml" filepath="$PROJECT_DIR$/1.3_Collections_Lite/1.3_Collections_Lite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2.1_Collections_Pro/2.1_Collections_Pro.iml" filepath="$PROJECT_DIR$/2.1_Collections_Pro/2.1_Collections_Pro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2.2_Multithreading/2.2_Multithreading.iml" filepath="$PROJECT_DIR$/2.2_Multithreading/2.2_Multithreading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2.3_SQL_JDBC/2.3_SQL_JDBC.iml" filepath="$PROJECT_DIR$/2.3_SQL_JDBC/2.3_SQL_JDBC.iml" />
       <module fileurl="file://$PROJECT_DIR$/junior.iml" filepath="$PROJECT_DIR$/junior.iml" />
     </modules>
   </component>
