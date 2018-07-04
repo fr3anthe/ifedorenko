@@ -24,25 +24,13 @@
         <module name="chapter_007" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="1.1 Base" target="1.8" />
+    <bytecodeTargetLevel target="8">
       <module name="1.1_Base" target="1.8" />
-      <module name="1.2 OOP" target="1.8" />
       <module name="1.2_OOP" target="1.8" />
-      <module name="1.3 Collections Lite" target="1.8" />
-      <module name="1.3_Collections Lite" target="1.8" />
       <module name="1.3_Collections_Lite" target="1.8" />
-      <module name="2.1 Collections Pro" target="1.8" />
-      <module name="2.1_Collections Pro" target="1.8" />
       <module name="2.1_Collections_Pro" target="1.8" />
-      <module name="2.2 Multithreading" target="1.8" />
       <module name="2.2_Multithreading" target="1.8" />
       <module name="2.3_SQL_JDBC" target="1.8" />
-      <module name="chapter_001" target="1.8" />
-      <module name="chapter_002" target="1.8" />
-      <module name="chapter_003" target="1.8" />
-      <module name="chapter_005" target="1.8" />
-      <module name="chapter_007" target="1.8" />
       <module name="junior" target="1.8" />
     </bytecodeTargetLevel>
   </component>
