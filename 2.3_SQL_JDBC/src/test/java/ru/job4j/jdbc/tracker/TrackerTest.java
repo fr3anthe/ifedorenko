@@ -2,11 +2,8 @@ package ru.job4j.jdbc.tracker;
 
 import org.junit.Test;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Tracker test.
@@ -14,7 +11,6 @@ import static org.junit.Assert.*;
 public class TrackerTest {
     /**
      * Test add.
-     * @throws Exception exception
      */
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() throws Exception {
@@ -29,10 +25,9 @@ public class TrackerTest {
 
     /**
      * Test delete.
-     * @throws Exception exception
      */
     @Test
-    public void whenDeleteItemThenSizeIsReduced() throws Exception {
+    public void whenDeleteItemThenSizeIsReduced() {
         try (Tracker tracker = new Tracker()) {
             Item item = new Item("Moscow", "desc", 123L);
             int expect = tracker.size();
@@ -45,7 +40,6 @@ public class TrackerTest {
 
     /**
      * Test update.
-     * @throws Exception exception
      */
     @Test
     public void whenUpdateOldItemThenOldItemReplacNewItem() throws Exception {

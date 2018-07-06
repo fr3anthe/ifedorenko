@@ -1,7 +1,10 @@
 package ru.job4j.jdbc.tracker.sql;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.jdbc.tracker.Item;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -19,13 +22,15 @@ public class Database implements AutoCloseable {
      * @param propetries properties
      */
     private Properties properties;
+    /**
+     * @param Log logger
+     */
+    private final static Logger LOGGER = LoggerFactory.getLogger(Database.class);
 
     /**
      * Constrcutor.
-     * @throws IOException exception
-     * @throws SQLException exception
      */
-    public Database() throws IOException, SQLException {
+    public Database() {
         connection = null;
         properties = new Properties();
         initProperties();
@@ -34,20 +39,20 @@ public class Database implements AutoCloseable {
 
     /**
      * Method for initializing properties.
-     * @throws IOException exception
      */
-    public void initProperties() throws IOException {
-        try (FileInputStream fis = new FileInputStream("config.properties")) {
-            properties.load(fis);
+    public void initProperties() {
+        File file = new File(this.getClass().getClassLoader().getResource("config.properties").getFile());
+        try (FileInputStream fis = new FileInputStream(file)) {
+                properties.load(fis);
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
     /**
      * Method for initializing work with database.
-     * @throws SQLException exception
-     * @throws IOException exception
      */
-    public void initDB() throws SQLException, IOException {
+    public void initDB() {
         if (!connectDB()) {
             createDB();
             connectDB();
@@ -71,7 +76,7 @@ public class Database implements AutoCloseable {
                 result = true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
             return result;
         }
         return result;
@@ -79,9 +84,8 @@ public class Database implements AutoCloseable {
 
     /**
      * Method for creating database.
-     * @throws SQLException exception
      */
-    private void createDB() throws SQLException {
+    private void createDB() {
         String host = properties.getProperty("db.postgres");
         String login = properties.getProperty("db.login");
         String password = properties.getProperty("db.password");
@@ -91,7 +95,7 @@ public class Database implements AutoCloseable {
                 conn.prepareStatement(properties.getProperty("createDB")).execute();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -102,7 +106,7 @@ public class Database implements AutoCloseable {
         try {
             connection.prepareStatement(properties.getProperty("createTable")).execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -117,7 +121,7 @@ public class Database implements AutoCloseable {
             ps.setTimestamp(3, new Timestamp(item.getCreate()));
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
         item.setId(takeId());
     }
@@ -135,7 +139,7 @@ public class Database implements AutoCloseable {
             ps.setInt(4, item.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -149,7 +153,7 @@ public class Database implements AutoCloseable {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -157,14 +161,12 @@ public class Database implements AutoCloseable {
      * Method for finding all in database.
      */
     public void findAll() {
-        try (PreparedStatement ps = connection.prepareStatement(properties.getProperty("findAll"))) {
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    System.out.println(String.format("%d %s %s ", rs.getInt("id"), rs.getString("name"), rs.getString("description")));
-                }
+        try (PreparedStatement ps = connection.prepareStatement(properties.getProperty("findAll")); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                System.out.println(String.format("%d %s %s ", rs.getInt("id"), rs.getString("name"), rs.getString("description")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -181,7 +183,7 @@ public class Database implements AutoCloseable {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -201,7 +203,7 @@ public class Database implements AutoCloseable {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
         return result;
     }
@@ -212,14 +214,12 @@ public class Database implements AutoCloseable {
      */
     public int size() {
         int result = 0;
-        try (PreparedStatement ps = connection.prepareStatement(properties.getProperty("size"))) {
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    result = rs.getInt(1);
-                }
+        try (PreparedStatement ps = connection.prepareStatement(properties.getProperty("size")); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                result = rs.getInt(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
         return result;
     }
@@ -230,14 +230,12 @@ public class Database implements AutoCloseable {
      */
     private int takeId() {
         int result = 0;
-        try (PreparedStatement ps = connection.prepareStatement("select MAX(id) from items")) {
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    result = rs.getInt(1);
-                }
+        try (PreparedStatement ps = connection.prepareStatement("select MAX(id) from items"); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                result = rs.getInt(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
         return result;
     }

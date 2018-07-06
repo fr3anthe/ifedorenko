@@ -1,13 +1,9 @@
 package ru.job4j.jdbc.tracker;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.jdbc.tracker.sql.Database;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
 *Класс tracker.
@@ -17,16 +13,18 @@ import java.util.Random;
 */
 public class Tracker implements AutoCloseable {
 	/**
+	 * @param Log logger
+	 */
+	private final static Logger LOGGER = LoggerFactory.getLogger(Database.class);
+	/**
 	 * @param db work with database
 	 */
 	private Database db;
 
 	/**
 	 * Constrcutor.
-	 * @throws IOException exception
-	 * @throws SQLException exception
 	 */
-	public Tracker() throws IOException, SQLException {
+	public Tracker() {
 		this.db = new Database();
 	}
 
@@ -87,10 +85,13 @@ public class Tracker implements AutoCloseable {
 
 	/**
 	 * Method close.
-	 * @throws Exception exception
 	 */
 	@Override
-	public void close() throws Exception {
-		db.close();
+	public void close()  {
+		try {
+			db.close();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 	}
 }
