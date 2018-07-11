@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-
 /**
  * Tracker test.
  */
@@ -13,7 +12,7 @@ public class TrackerTest {
      * Test add.
      */
     @Test
-    public void whenAddNewItemThenTrackerHasSameItem() throws Exception {
+    public void whenAddNewItemThenTrackerHasSameItem() {
         try (Tracker tracker = new Tracker()) {
             Item item = new Item("Moscow", "desc", 123L);
             int expect = tracker.size();
@@ -42,7 +41,7 @@ public class TrackerTest {
      * Test update.
      */
     @Test
-    public void whenUpdateOldItemThenOldItemReplacNewItem() throws Exception {
+    public void whenUpdateOldItemThenOldItemReplacNewItem() {
         try (Tracker tracker = new Tracker()) {
             Item item1 = new Item("Moscow", "desc", 123L);
             Item item2 = new Item("Saransk", "desc", 123L);
