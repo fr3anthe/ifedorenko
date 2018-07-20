@@ -89,9 +89,9 @@ public class Program {
             parser = XMLReaderFactory.createXMLReader();
             parser.setContentHandler(parse);
             parser.parse(properties.getProperty("dest.xml"));
+            System.out.print(parse.getResult());
         } catch (SAXException | IOException e) {
             LOGGER.error(e.getMessage(), e);
         }
-        System.out.print(parse.getResult());
     }
 }
