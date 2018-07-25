@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Class ArraySet.
- * @param <E>
+ * @param <E> generic
  */
 public class ArraySet<E> extends AbstractArray implements SimpleSet<E> {
     /**

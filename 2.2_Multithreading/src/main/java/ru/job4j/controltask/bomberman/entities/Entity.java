@@ -6,15 +6,15 @@ import ru.job4j.controltask.bomberman.move.Step;
 
 public abstract class Entity implements Runnable {
     /**
-     * @param board our game board
+     * game board
      */
     protected final Board board;
     /**
-     * @param currentCell current position on the board
+     * current position on the board
      */
     protected Cell currentCell;
     /**
-     * @param step step
+     * step
      */
     protected final Step step;
 

@@ -2,6 +2,7 @@ package ru.job4j.collections;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *Класс ConvertList.
  *@author ifedorenko
@@ -47,9 +48,9 @@ public class ConvertList {
     }
 
     /**
-     * Convert List<int[]> to List<Integer>.
-     * @param list list<int[]>
-     * @return List<Integer> of List<int[]>
+     * Convert List with int[] to List with Integer.
+     * @param list listwith int[]
+     * @return List with Integer
      */
     public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<>();

@@ -10,13 +10,7 @@ import ru.job4j.chess.ImpossibleMoveException;
  *@version 1
  */
 public abstract class Figure {
-    /**
-     * @param position position on the board
-     */
     protected final Cell position;
-    /**
-     * @color our color
-     */
     protected final String color;
 
     /**

@@ -5,7 +5,7 @@ package ru.job4j.threads;
  */
 public abstract class WordCheck implements Runnable {
     /**
-     * @param str array char
+     * array char
      */
     protected char[] str;
 

@@ -2,7 +2,7 @@ package ru.job4j.tree;
 
 /**
  * Interface SimpleTree.
- * @param <E>
+ * @param <E> generic
  */
 public interface SimpleTree<E extends Comparable<E>> extends Iterable<E> {
     /**

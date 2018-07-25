@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class UserConvert {
     /**
-     * Main method in class. Convert from List<User> to HashMap<Integer, User>
-     * @param list List<User>
-     * @return HashMap<Integer, User>
+     * Main method in class. Convert from List to HashMap.
+     * @param list List with User
+     * @return result convert
      */
     public HashMap<Integer, User> process(List<User> list) {
         HashMap<Integer, User> result = new HashMap<>();

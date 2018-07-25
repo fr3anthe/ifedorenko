@@ -14,7 +14,9 @@
 		<module>2.1_Collections_Pro</module>
 		<module>2.2_Multithreading</module>
 		<module>2.3_SQL_JDBC</module>
-	</modules>
+        <module>2.4_Servlet_JSP</module>
+
+    </modules>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -100,6 +102,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

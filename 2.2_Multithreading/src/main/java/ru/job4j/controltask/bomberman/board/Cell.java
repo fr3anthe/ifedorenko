@@ -1,7 +1,5 @@
 package ru.job4j.controltask.bomberman.board;
 
-import ru.job4j.controltask.bomberman.entities.Entity;
-
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -9,11 +7,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Cell extends ReentrantLock {
     /**
-     * @param x position on the board by x
+     * position on the board by x
      */
     private final int x;
     /**
-     * @param y position on the board by y
+     * position on the board by y
      */
     private final int y;
 

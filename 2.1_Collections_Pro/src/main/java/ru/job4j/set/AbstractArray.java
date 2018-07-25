@@ -17,13 +17,7 @@ public abstract class AbstractArray<E> {
      * @param EMPTY_ELEMENTDATA size array when initialize by null
      */
     private static final Object[] EMPTY_ELEMENTDATA = {};
-    /**
-     * @param objects our container
-     */
     protected Object[] objects;
-    /**
-     * @param index position in array
-     */
     protected int index = 0;
 
     /**

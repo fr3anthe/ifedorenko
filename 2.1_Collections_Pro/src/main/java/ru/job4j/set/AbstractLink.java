@@ -8,17 +8,8 @@ import java.util.NoSuchElementException;
  * @param <E> generic
  */
 public abstract class AbstractLink<E> {
-    /**
-     * @param size size of container
-     */
     protected int size = 0;
-    /**
-     * @param first first element in container
-     */
     protected Node<E> first;
-    /**
-     * @param last last element in container
-     */
     protected Node<E> last;
 
     /**
@@ -120,17 +111,8 @@ public abstract class AbstractLink<E> {
      * @param <E> generic
      */
     protected static class Node<E> {
-        /**
-         * @param item object.
-         */
         protected E item;
-        /**
-         * @param prev previous Link
-         */
         protected Node<E> prev;
-        /**
-         * @param next next link
-         */
         protected Node<E> next;
 
         /**

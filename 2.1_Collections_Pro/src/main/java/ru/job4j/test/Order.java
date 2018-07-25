@@ -9,35 +9,17 @@ public class Order {
      */
     public enum Type {
         /**
-         * @param SELL sell
-         * @param BUY buy
+         * SELL sell
+         * BUY buy
          */
         SELL, BUY
     }
 
-    /**
-     * @param book book
-     */
+
     protected final String book;
-
-    /**
-     * @param type type
-     */
     protected final Type type;
-
-    /**
-     * @param price price
-     */
     protected final float price;
-
-    /**
-     * @param volume volume
-     */
     protected int volume;
-
-    /**
-     * @param id id
-     */
     protected final int id;
 
     /**

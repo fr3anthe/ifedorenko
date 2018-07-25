@@ -6,31 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="1.1 Base" />
         <module name="1.1_Base" />
-        <module name="1.2 OOP" />
         <module name="1.2_OOP" />
-        <module name="1.3 Collections Lite" />
         <module name="1.3_Collections_Lite" />
-        <module name="2.1 Collections Pro" />
         <module name="2.1_Collections_Pro" />
-        <module name="2.2 Multithreading" />
         <module name="2.2_Multithreading" />
         <module name="2.3_SQL_JDBC" />
-        <module name="chapter_001" />
-        <module name="chapter_002" />
-        <module name="chapter_003" />
-        <module name="chapter_005" />
-        <module name="chapter_007" />
+        <module name="2.4_Servlet_JSP" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
+    <bytecodeTargetLevel>
       <module name="1.1_Base" target="1.8" />
       <module name="1.2_OOP" target="1.8" />
       <module name="1.3_Collections_Lite" target="1.8" />
       <module name="2.1_Collections_Pro" target="1.8" />
       <module name="2.2_Multithreading" target="1.8" />
       <module name="2.3_SQL_JDBC" target="1.8" />
+      <module name="2.4_Servlet_JSP" target="1.8" />
       <module name="junior" target="1.8" />
     </bytecodeTargetLevel>
   </component>
