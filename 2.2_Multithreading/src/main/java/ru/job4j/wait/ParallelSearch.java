@@ -68,7 +68,6 @@ public class ParallelSearch {
                     e.printStackTrace();
                 }
                 finish = true;
-
             }
         };
 
@@ -80,7 +79,6 @@ public class ParallelSearch {
                     if (temp.contains(text)) {
                         paths.add(path.toString());
                     }
-
                 } catch (InterruptedException | IOException e) {
                     e.printStackTrace();
                 }
