@@ -1,6 +1,7 @@
 package ru.job4j.servlets.http;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Class ValidateService. Singleton.
@@ -12,11 +13,11 @@ public class ValidateService {
     /**
      * Singleton variable
      */
-    private static ValidateService instance = new ValidateService();
+    private static final ValidateService instance = new ValidateService();
     /**
      * id
      */
-    private static int idCount = 0;
+    private int idCount = 0;
     /**
      * Store
      */
@@ -35,7 +36,9 @@ public class ValidateService {
      * @param email email for user
      */
     public void add(String name, String login, String email) {
-        store.add(new User(idCount++, name, login, email));
+        synchronized (this) {
+            store.add(new User(idCount++, name, login, email));
+        }
     }
 
     /**
@@ -48,7 +51,7 @@ public class ValidateService {
         if (this.findById(id)) {
             store.update(id, name, email);
         } else {
-            throw new NullPointerException("User isn't created");
+            throw new NoSuchElementException();
         }
     }
 
@@ -56,11 +59,11 @@ public class ValidateService {
      * delete user from store.
      * @param id use for find user for deleting
      */
-    public void delete(int id) {
+    public void delete (int id) {
         if (findById(id)) {
             store.delete(id);
         } else {
-            throw new NullPointerException("User isn't created");
+            throw new NoSuchElementException();
         }
     }
 
