@@ -13,11 +13,11 @@ public class MemoryStore implements Store {
     /**
      * Singleton variable
      */
-    private static MemoryStore instance = new MemoryStore();
+    private static final MemoryStore instance = new MemoryStore();
     /**
      * Map for saving Users
      */
-    private ConcurrentHashMap<Integer, User> store = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, User> store = new ConcurrentHashMap<>();
 
     /**
      * add user in store.
