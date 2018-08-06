@@ -68,6 +68,30 @@ public class User {
         this.email = email;
     }
 
+    /**
+     * Getter for name.
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Getter for email.
+     * @return email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Getter for login.
+     * @return login
+     */
+    public String getLogin() {
+        return login;
+    }
+
     @Override
     public String toString() {
         return "id=" + id

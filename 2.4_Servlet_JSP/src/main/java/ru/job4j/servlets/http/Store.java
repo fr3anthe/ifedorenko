@@ -39,5 +39,5 @@ public interface Store {
      * @param id use for find user
      * @return user
      */
-    boolean findById(int id);
+    User findById(int id);
 }

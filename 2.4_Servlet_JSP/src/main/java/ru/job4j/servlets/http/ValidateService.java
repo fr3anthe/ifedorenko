@@ -13,7 +13,7 @@ public class ValidateService {
     /**
      * Singleton variable
      */
-    private static final ValidateService instance = new ValidateService();
+    private static final ValidateService INSTANCE = new ValidateService();
     /**
      * id
      */
@@ -48,23 +48,15 @@ public class ValidateService {
      * @param email for updating
      */
     public void update(int id, String name, String email) {
-        if (this.findById(id)) {
-            store.update(id, name, email);
-        } else {
-            throw new NoSuchElementException();
-        }
+        store.update(id, name, email);
     }
 
     /**
      * delete user from store.
      * @param id use for find user for deleting
      */
-    public void delete (int id) {
-        if (findById(id)) {
-            store.delete(id);
-        } else {
-            throw new NoSuchElementException();
-        }
+    public void delete(int id) {
+        store.delete(id);
     }
 
     /**
@@ -80,7 +72,7 @@ public class ValidateService {
      * @param id id for finding.
      * @return result
      */
-    private boolean findById(int id) {
+    public User findById(int id) {
         return store.findById(id);
     }
 
@@ -89,6 +81,6 @@ public class ValidateService {
      * @return ValidateService instance.
      */
     public static ValidateService getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }

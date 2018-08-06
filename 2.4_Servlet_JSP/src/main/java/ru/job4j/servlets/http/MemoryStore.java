@@ -13,7 +13,7 @@ public class MemoryStore implements Store {
     /**
      * Singleton variable
      */
-    private static final MemoryStore instance = new MemoryStore();
+    private static final MemoryStore INSTANCE = new MemoryStore();
     /**
      * Map for saving Users
      */
@@ -66,11 +66,11 @@ public class MemoryStore implements Store {
     /**
      * find user using id.
      * @param id id for finding.
-     * @return result
+     * @return User
      */
     @Override
-    public boolean findById(int id) {
-        return store.containsKey(id);
+    public User findById(int id) {
+        return store.get(id);
     }
 
     /**
@@ -78,6 +78,6 @@ public class MemoryStore implements Store {
      * @return MemoryStore instance
      */
     public static MemoryStore getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }
