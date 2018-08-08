@@ -26,6 +26,7 @@
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.job4j.servlets.http.UsersServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>

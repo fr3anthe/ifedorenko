@@ -17,8 +17,14 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        Pages.printUsers(response);
+        request.getRequestDispatcher(String.format("%s/list.jsp", request.getContextPath())).forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        int id = Integer.valueOf(req.getParameter("id"));
+        ValidateService.getInstance().delete(id);
+        req.getRequestDispatcher(String.format("%s/list.jsp", req.getContextPath())).forward(req, resp);
     }
 }

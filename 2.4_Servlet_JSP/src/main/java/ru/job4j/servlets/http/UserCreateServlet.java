@@ -18,9 +18,7 @@ public class UserCreateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        Pages.printCreate(response);
+        request.getRequestDispatcher(String.format("%s/create.jsp", request.getContextPath())).forward(request, response);
     }
 
     @Override
@@ -30,6 +28,6 @@ public class UserCreateServlet extends HttpServlet {
         String login = request.getParameter("login");
         String email = request.getParameter("email");
         ValidateService.getInstance().add(name, login, email);
-        doGet(request, response);
+        response.sendRedirect(String.format("%s/list.jsp", request.getContextPath()));
     }
 }
