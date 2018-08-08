@@ -15,13 +15,9 @@ public class ValidateService {
      */
     private static final ValidateService INSTANCE = new ValidateService();
     /**
-     * id
-     */
-    private int idCount = 0;
-    /**
      * Store
      */
-    private final Store store = MemoryStore.getInstance();
+    private final DBStore store = DBStore.getInstance();
 
     /**
      * Private cosntructor for Singleton
@@ -36,9 +32,7 @@ public class ValidateService {
      * @param email email for user
      */
     public void add(String name, String login, String email) {
-        synchronized (this) {
-            store.add(new User(idCount++, name, login, email));
-        }
+            store.add(new User(name, login, email));
     }
 
     /**

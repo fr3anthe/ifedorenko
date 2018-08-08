@@ -17,10 +17,10 @@ public interface Store {
     /**
      * update.
      * @param id use for find user
-     * @param login login for update
+     * @param name name for update
      * @param email email for update
      */
-    void update(int id, String login, String email);
+    void update(int id, String name, String email);
 
     /**
      * delete.

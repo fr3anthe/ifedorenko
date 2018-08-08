@@ -1,5 +1,6 @@
 package ru.job4j.servlets.http;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -11,7 +12,7 @@ public class User {
     /**
      * user's id
      */
-    private final int id;
+    private int id;
     /**
      * user's name
      */
@@ -27,21 +28,34 @@ public class User {
     /**
      * user's create date
      */
-    private final LocalDateTime createDate;
+    private LocalDate createDate;
 
     /**
      * Constructor for User.
-     * @param id user's id
      * @param name user's name
      * @param login user's login
      * @param email user's email
      */
-    public User(int id, String name, String login, String email) {
+    public User(String name, String login, String email) {
+        this.name = name;
+        this.login = login;
+        this.email = email;
+    }
+
+    /**
+     * Constructor for User.
+     * @param id user's id from db
+     * @param name user's name
+     * @param login user's login
+     * @param email user's email
+     * @param createDate user's create date from db
+     */
+    public User(int id, String name, String login, String email, LocalDate createDate) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
-        this.createDate = LocalDateTime.now();
+        this.createDate = createDate;
     }
 
     /**
@@ -90,14 +104,5 @@ public class User {
      */
     public String getLogin() {
         return login;
-    }
-
-    @Override
-    public String toString() {
-        return "id=" + id
-                + ", name=" + name
-                + ", login=" + login
-                + ", email=" + email
-                + ", create=" + createDate;
     }
 }
