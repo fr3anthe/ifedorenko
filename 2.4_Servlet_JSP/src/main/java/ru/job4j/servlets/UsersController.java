@@ -18,25 +18,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author ifedorenko
  * @since 25.07.2018
  */
-public class EchoServlet extends HttpServlet {
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(EchoServlet.class);
+public class UsersController extends HttpServlet {
     private List<String> users = new CopyOnWriteArrayList<String>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append("hello world, " + this.users);
-        writer.flush();
+        req.setAttribute("users", UserStorage.getInstance().getUsers() );
+        req.getRequestDispatcher("/WEB-INF/views/UsersView.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         UserStorage.getInstance().add(new User(req.getParameter("login"), req.getParameter("email")));
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/ ", req.getContextPath()));
     }
 }
