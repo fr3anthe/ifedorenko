@@ -18,8 +18,7 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //response.sendRedirect(String.format("%s/edit.jsp", request.getContextPath()));
-        request.getRequestDispatcher(String.format("%s/edit.jsp", request.getContextPath())).forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/edit.jsp").forward(request, response);
     }
 
     @Override
@@ -29,7 +28,6 @@ public class UserUpdateServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         ValidateService.getInstance().update(id, name, email);
-        System.out.println(ValidateService.getInstance().findById(id).getName());
-        response.sendRedirect(String.format("%s/list.jsp", request.getContextPath()));
+        response.sendRedirect(String.format("%s/", request.getContextPath()));
     }
 }
