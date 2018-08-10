@@ -10,16 +10,14 @@ import org.slf4j.LoggerFactory;
  * @since 07.08.2018
  */
 public class User {
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(User.class);
     private String login;
     private String email;
+    private String password;
 
-    public User(String login, String email) {
+    public User(String login, String email, String password) {
         this.login = login;
         this.email = email;
+        this.password = password;
     }
 
     public String getLogin() {
@@ -28,5 +26,9 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
