@@ -118,6 +118,20 @@ public class DBStore implements Store {
         }
     }
 
+    /**
+     * Delete user using login.
+     * @param login for deleting
+     */
+    public void delete(String login) {
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement("delete from users where login = ?")) {
+            ps.setString(1, login);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
+
     @Override
     public List<User> findAll() {
         ArrayList<User> users = new ArrayList<>();

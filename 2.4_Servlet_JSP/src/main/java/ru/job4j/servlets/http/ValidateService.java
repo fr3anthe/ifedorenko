@@ -57,6 +57,14 @@ public class ValidateService {
     }
 
     /**
+     * delete user from store.
+     * @param login use for find user for deleting
+     */
+    public void delete(String login) {
+        store.delete(login);
+    }
+
+    /**
      * find all user in store.
      * @return list with all user
      */
