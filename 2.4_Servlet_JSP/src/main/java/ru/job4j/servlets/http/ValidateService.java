@@ -1,7 +1,6 @@
 package ru.job4j.servlets.http;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Class ValidateService. Singleton.
@@ -31,18 +30,20 @@ public class ValidateService {
      * @param login login for user
      * @param email email for user
      */
-    public void add(String name, String login, String email) {
-            store.add(new User(name, login, email));
+    public void add(String name, String login, String email, String role, String password) {
+            store.add(new User(name, login, email, role, password));
     }
 
     /**
      * update user from store.
-     * @param id for find user
+     * @param login for find user
      * @param name for updating
      * @param email for updating
+     * @param role for updating
+     * @param password for updating
      */
-    public void update(int id, String name, String email) {
-        store.update(id, name, email);
+    public void update(String login, String name, String email, String role, String password) {
+        store.update(login, name, email, role, password);
     }
 
     /**
@@ -68,6 +69,21 @@ public class ValidateService {
      */
     public User findById(int id) {
         return store.findById(id);
+    }
+
+    public User findByLogin(String login) {
+        return store.findByLogin(login);
+    }
+
+    public boolean isCredential(String login, String password) {
+        boolean exists = false;
+        for (User user : store.findAll()) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
     }
 
     /**

@@ -27,7 +27,9 @@ public class UserCreateServlet extends HttpServlet {
         String name = request.getParameter("name");
         String login = request.getParameter("login");
         String email = request.getParameter("email");
-        ValidateService.getInstance().add(name, login, email);
+        String role = request.getParameter("role");
+        String password = request.getParameter("password");
+        ValidateService.getInstance().add(name, login, email, role, password);
         response.sendRedirect(String.format("%s/", request.getContextPath()));
     }
 }
