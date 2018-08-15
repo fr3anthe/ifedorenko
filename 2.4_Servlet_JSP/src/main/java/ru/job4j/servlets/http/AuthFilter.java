@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * TODO: comment
+ * Class AuthFilter.
  *
  * @author ifedorenko
  * @since 14.08.2018
@@ -28,7 +28,7 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        if (req.getRequestURI().contains("/signin") ) {
+        if (req.getRequestURI().contains("/signin")) {
             chain.doFilter(request, response);
         } else {
             HttpSession session = req.getSession();

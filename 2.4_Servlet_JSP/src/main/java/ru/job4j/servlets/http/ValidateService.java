@@ -29,6 +29,8 @@ public class ValidateService {
      * @param name name for user
      * @param login login for user
      * @param email email for user
+     * @param role role for user
+     * @param password password for user
      */
     public void add(String name, String login, String email, String role, String password) {
             store.add(new User(name, login, email, role, password));
@@ -71,10 +73,21 @@ public class ValidateService {
         return store.findById(id);
     }
 
+    /**
+     * find user on the store using login.
+     * @param login login for finding
+     * @return user
+     */
     public User findByLogin(String login) {
         return store.findByLogin(login);
     }
 
+    /**
+     * Check credential.
+     * @param login login for checking
+     * @param password password for checking
+     * @return result
+     */
     public boolean isCredential(String login, String password) {
         boolean exists = false;
         for (User user : store.findAll()) {

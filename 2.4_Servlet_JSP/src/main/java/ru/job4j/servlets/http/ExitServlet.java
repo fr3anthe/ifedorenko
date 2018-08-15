@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "ExitServlet")
 public class ExitServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         synchronized (session) {
@@ -18,6 +19,7 @@ public class ExitServlet extends HttpServlet {
         response.sendRedirect(String.format("%s/signin", request.getContextPath()));
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

@@ -29,7 +29,7 @@ public class UsersServlet extends HttpServlet {
                 request.setAttribute("user", vs.findByLogin((String) session.getAttribute("login")));
                 request.getRequestDispatcher("/WEB-INF/views/userList.jsp").forward(request, response);
             }
-        };
+        }
     }
 
     @Override

@@ -19,6 +19,8 @@ public interface Store {
      * @param login use for find user
      * @param name name for update
      * @param email email for update
+     * @param role role for update
+     * @param password password for update
      */
     void update(String login, String name, String email, String role, String password);
 
@@ -44,7 +46,7 @@ public interface Store {
     /**
      * findByLogin
      * @param login use for find user
-     * @rerurn user
+     * @return n user
      */
     User findByLogin(String login);
 }
