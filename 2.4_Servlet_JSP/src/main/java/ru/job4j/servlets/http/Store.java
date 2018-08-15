@@ -16,11 +16,11 @@ public interface Store {
 
     /**
      * update.
-     * @param id use for find user
+     * @param login use for find user
      * @param name name for update
      * @param email email for update
      */
-    void update(int id, String name, String email);
+    void update(String login, String name, String email, String role, String password);
 
     /**
      * delete.
@@ -40,4 +40,11 @@ public interface Store {
      * @return user
      */
     User findById(int id);
+
+    /**
+     * findByLogin
+     * @param login use for find user
+     * @rerurn user
+     */
+    User findByLogin(String login);
 }

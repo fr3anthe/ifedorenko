@@ -17,7 +17,7 @@ public class MemoryStore implements Store {
     /**
      * Map for saving Users
      */
-    private final ConcurrentHashMap<Integer, User> store = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, User> store = new ConcurrentHashMap<>();
 
     /**
      * add user in store.
@@ -25,18 +25,18 @@ public class MemoryStore implements Store {
      */
     @Override
     public void add(User user) {
-        store.put(user.getId(), user);
+        store.put(user.getLogin(), user);
     }
 
     /**
      * update user from store.
-     * @param id use for find user for deleting
+     * @param login use for find user for deleting
      * @param name name for updating
      * @param email name for updating
      */
     @Override
-    public void update(int id, String name, String email) {
-        User temp = store.get(id);
+    public void update(String  login, String name, String email, String role, String password) {
+        User temp = store.get(login);
         if (name != null) {
             temp.setName(name);
         }
@@ -71,6 +71,11 @@ public class MemoryStore implements Store {
     @Override
     public User findById(int id) {
         return store.get(id);
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return null;
     }
 
     /**

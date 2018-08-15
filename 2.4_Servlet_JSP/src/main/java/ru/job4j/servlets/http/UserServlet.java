@@ -64,10 +64,14 @@ public class UserServlet extends HttpServlet {
     public void init() {
         map.put(add, n -> service.add(n.getParameter("name"),
                 n.getParameter("login"),
-                n.getParameter("email")));
-        map.put(update, n -> service.update(Integer.valueOf(n.getParameter("id")),
+                n.getParameter("email"),
+                n.getParameter("role"),
+                n.getParameter("password")));
+        map.put(update, n -> service.update(n.getParameter("login"),
                 n.getParameter("name"),
-                n.getParameter("email")));
+                n.getParameter("email"),
+                n.getParameter("role"),
+                n.getParameter("password")));
         map.put(delete, n -> service.delete(Integer.valueOf(n.getParameter("id"))));
     }
 }
