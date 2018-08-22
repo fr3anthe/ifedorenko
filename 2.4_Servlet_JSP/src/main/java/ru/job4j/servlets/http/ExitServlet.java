@@ -12,11 +12,8 @@ import java.io.IOException;
 public class ExitServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        synchronized (session) {
-            session.invalidate();
-        }
-        response.sendRedirect(String.format("%s/signin", request.getContextPath()));
+      request.getSession().invalidate();
+      response.sendRedirect(String.format("%s/signin", request.getContextPath()));
     }
 
     @Override

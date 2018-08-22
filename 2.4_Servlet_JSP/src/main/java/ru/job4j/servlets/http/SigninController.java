@@ -21,12 +21,9 @@ public class SigninController extends HttpServlet {
         String password = request.getParameter("password");
         if (ValidateService.getInstance().isCredential(login, password)) {
             String role = ValidateService.getInstance().findByLogin(login).getRole();
-            System.out.println(role);
             HttpSession session = request.getSession();
-            synchronized (session) {
-                session.setAttribute("login", login);
-                session.setAttribute("role", role);
-            }
+            session.setAttribute("login", login);
+            session.setAttribute("role", role);
             response.sendRedirect(String.format("%s/", request.getContextPath()));
         } else {
             request.setAttribute("error", "credentional invalid");
