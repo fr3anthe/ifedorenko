@@ -8,6 +8,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script>
+            function addUser() {
+                if (validate()) {
+                    addRow();
+                }
+            }
+
             function validate() {
                 var result = true;
                 var view = '';
@@ -23,6 +29,17 @@
                     alert(view);
                 }
                 return result;
+            }
+
+            function addRow() {
+                var fname = $('#fname').val();
+                var lname = $('#lname').val();
+                var description = $('#description').val();
+                var sex = $('input:radio[name=optradio]:checked').val();
+                $('#table tr:last').after('<tr><td>' + fname +'</td>' +
+                    '<td>' + lname +'</td>' +
+                    '<td>' + sex +'</td>' +
+                    '<td>' + description +'</td></tr>');
             }
         </script>
     </head>
@@ -41,20 +58,20 @@
                 </div>
 
                 Sex:
-                <label class="checkbox-inline"><input type="checkbox" value="male" checked>male</label>
-                <label class="checkbox-inline"><input type="checkbox" value="female">female</label>
+                <label class="radio-inline"><input type="radio" name="optradio" value="male" checked>male</label>
+                <label class="radio-inline"><input type="radio" name="optradio" value="female">female</label>
                 <div class="form-group">
                     <label for="description">Description:</label>
                     <textarea class="form-control" rows="5" id="description"></textarea>
                 </div>
-                <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+                <button type="button" class="btn btn-default" onclick="addUser();">Submit</button>
             </form>
         </div>
         <br><br><br>
 
         <div class="container">
             <h2>Users</h2>
-            <table class="table table-bordered">
+            <table id="table" class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Firstname</th>
