@@ -10,20 +10,16 @@
         <script>
             function validate() {
                 var result = true;
-                var array = [];
+                var view = '';
                 if ($('#fname').val() == '') {
                     result = false;
-                    array.push("fname");
+                    view += ($("#fname").attr('title')) + '\n';
                 }
                 if ($('#lname').val() == '') {
                     result = false;
-                    array.push("lname");
+                    view += ($("#lname").attr('title')) + '\n';
                 }
                 if (!result) {
-                    var view = '';
-                    array.forEach(function(id) {
-                        view += ($("#" + id).attr('title')) + '\n';
-                    })
                     alert(view);
                 }
                 return result;
