@@ -21,27 +21,22 @@ public interface Store {
      * @param email email for update
      * @param role role for update
      * @param password password for update
+     * @param country country for update
+     * @param city city for update
      */
-    void update(String login, String name, String email, String role, String password);
+    void update(String login, String name, String email, String role, String password, String country, String city);
 
     /**
      * delete.
-     * @param id use for find user.
+     * @param login use for find user.
      */
-    void delete(int id);
+    void delete(String login);
 
     /**
      * findAll.
      * @return all user.
      */
     List<User> findAll();
-
-    /**
-     * findById.
-     * @param id use for find user
-     * @return user
-     */
-    User findById(int id);
 
     /**
      * findByLogin

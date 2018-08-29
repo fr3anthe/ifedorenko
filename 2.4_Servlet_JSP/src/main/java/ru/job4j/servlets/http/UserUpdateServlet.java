@@ -18,8 +18,8 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("user", ValidateService.getInstance().findById(id));
+        String login = request.getParameter("login");
+        request.setAttribute("user", ValidateService.getInstance().findByLogin(login));
         request.getRequestDispatcher("/WEB-INF/views/edit.jsp").forward(request, response);
     }
 
@@ -31,7 +31,9 @@ public class UserUpdateServlet extends HttpServlet {
         String email = request.getParameter("email");
         String role = request.getParameter("role");
         String password = request.getParameter("password");
-        ValidateService.getInstance().update(login, name, email, role, password);
+        String country = request.getParameter("country");
+        String city = request.getParameter("city");
+        ValidateService.getInstance().update(login, name, email, role, password, country, city);
         response.sendRedirect(String.format("%s/", request.getContextPath()));
     }
 }

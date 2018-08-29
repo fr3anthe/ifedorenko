@@ -1,5 +1,6 @@
 package ru.job4j.servlets.http;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -31,9 +32,11 @@ public class ValidateService {
      * @param email email for user
      * @param role role for user
      * @param password password for user
+     * @param country country for update
+     * @param city city for update
      */
-    public void add(String name, String login, String email, String role, String password) {
-            store.add(new User(name, login, email, role, password));
+    public void add(String name, String login, String email, String role, String password, String country, String city) {
+            store.add(new User(name, login, email, role, password, country, city));
     }
 
     /**
@@ -43,17 +46,11 @@ public class ValidateService {
      * @param email for updating
      * @param role for updating
      * @param password for updating
+     * @param country country for update
+     * @param city city for update
      */
-    public void update(String login, String name, String email, String role, String password) {
-        store.update(login, name, email, role, password);
-    }
-
-    /**
-     * delete user from store.
-     * @param id use for find user for deleting
-     */
-    public void delete(int id) {
-        store.delete(id);
+    public void update(String login, String name, String email, String role, String password, String country, String city) {
+        store.update(login, name, email, role, password, country, city);
     }
 
     /**
@@ -70,15 +67,6 @@ public class ValidateService {
      */
     public List<User> findAll() {
         return store.findAll();
-    }
-
-    /**
-     * find user using id.
-     * @param id id for finding.
-     * @return result
-     */
-    public User findById(int id) {
-        return store.findById(id);
     }
 
     /**

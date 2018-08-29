@@ -27,7 +27,7 @@ public class DBStore implements Store {
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static final DBStore INSTANCE = new DBStore();
     private final Properties properties;
-    private final User root = new User("root", "root", "root", "admin", "root");;
+    private final User root = new User("root", "root", "root@root.root", "admin", "root", "root", "root");
 
     /**
      * Constructor.
@@ -79,13 +79,14 @@ public class DBStore implements Store {
     @Override
     public void add(User user) {
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into users(login, name, email, role, password, create_date) values(?, ?, ?, ?, ?, ?)")) {
+             PreparedStatement ps = connection.prepareStatement("insert into users(login, name, email, role, password,country, city) values(?, ?, ?, ?, ?, ?, ?)")) {
             ps.setString(1, user.getLogin());
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getRole());
             ps.setString(5, user.getPassword());
-            ps.setDate(6, Date.valueOf(LocalDate.now()));
+            ps.setString(6, user.getCountry());
+            ps.setString(7, user.getCity());
             ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -93,25 +94,16 @@ public class DBStore implements Store {
     }
 
     @Override
-    public void update(String login, String name, String email, String role, String password) {
+    public void update(String login, String name, String email, String role, String password, String country, String city) {
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("update users set name = ?, email = ?, role = ?, password = ? where login = ?")) {
+             PreparedStatement ps = connection.prepareStatement("update users set name = ?, email = ?, role = ?, password = ?, country = ?, city = ? where login = ?")) {
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, role);
             ps.setString(4, password);
-            ps.setString(5, login);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-    }
-
-    @Override
-    public void delete(int id) {
-        try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("delete from users where id = ?")) {
-            ps.setInt(1, id);
+            ps.setString(5, country);
+            ps.setString(6, city);
+            ps.setString(7, login);
             ps.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -139,43 +131,18 @@ public class DBStore implements Store {
              PreparedStatement ps = connection.prepareStatement("select * from users");
              ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    users.add(new User(rs.getInt("id"),
-                            rs.getString("name"),
+                    users.add(new User(rs.getString("name"),
                             rs.getString("login"),
                             rs.getString("email"),
                             rs.getString("role"),
                             rs.getString("password"),
-                            rs.getDate("create_date").toLocalDate()));
+                            rs.getString("country"),
+                            rs.getString("city")));
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         } finally {
             return users;
-        }
-    }
-
-
-    @Override
-    public User findById(int id) {
-        User user = null;
-        try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("select * from users where id = ?")) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    user = new User(rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getString("login"),
-                            rs.getString("email"),
-                            rs.getString("role"),
-                            rs.getString("password"),
-                            rs.getDate("create_date").toLocalDate());
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
-        } finally {
-            return user;
         }
     }
 
@@ -187,13 +154,13 @@ public class DBStore implements Store {
                 ps.setString(1, login);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
-                        user = new User(rs.getInt("id"),
-                                rs.getString("name"),
+                        user = new User(rs.getString("name"),
                                 rs.getString("login"),
                                 rs.getString("email"),
                                 rs.getString("role"),
                                 rs.getString("password"),
-                                rs.getDate("create_date").toLocalDate());
+                                rs.getString("country"),
+                                rs.getString("city"));
                     }
                 }
             } catch (SQLException e) {

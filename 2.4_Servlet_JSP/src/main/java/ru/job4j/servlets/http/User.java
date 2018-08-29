@@ -25,10 +25,6 @@ public class User {
      */
     private String email;
     /**
-     * user's create date
-     */
-    private LocalDate createDate;
-    /**
      * user's role
      */
     private String role;
@@ -36,6 +32,14 @@ public class User {
      * user's password
      */
     private String password;
+    /**
+     * user's country
+     */
+    private String country;
+    /**
+     * user's city
+     */
+    private String city;
 
     /**
      * Constructor for User. Used for add in the db.
@@ -44,41 +48,17 @@ public class User {
      * @param email user's email
      * @param role user's role
      * @param password user's password
+     * @param country user's country
+     * @param city user's city
      */
-    public User(String name, String login, String email, String role, String password) {
+    public User(String name, String login, String email, String role, String password, String country, String city) {
         this.name = name;
         this.login = login;
         this.email = email;
         this.role = role;
         this.password = password;
-    }
-
-    /**
-     * Constructor for User. Used for view on the page.
-     * @param id user's id from db
-     * @param name user's name
-     * @param login user's login
-     * @param email user's email
-     * @param role user's role
-     * @param password user's password
-     * @param createDate user's create date from db
-     */
-    public User(int id, String name, String login, String email, String role, String password, LocalDate createDate) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.email = email;
-        this.createDate = createDate;
-        this.role = role;
-        this.password = password;
-    }
-
-    /**
-     * Getter for id.
-     * @return id
-     */
-    public int getId() {
-        return id;
+        this.country = country;
+        this.city = city;
     }
 
     /**
@@ -146,10 +126,34 @@ public class User {
     }
 
     /**
-     * Getter for password.
-     * @return password.
+     * Getter for country.
+     * @return country
      */
-    public LocalDate getCreateDate() {
-        return createDate;
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Setter for country.
+     * @param country country
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    /**
+     * Getter for city.
+     * @return city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Setter for city.
+     * @param city city
+     */
+    public void setCity(String city) {
+        this.city = city;
     }
 }
