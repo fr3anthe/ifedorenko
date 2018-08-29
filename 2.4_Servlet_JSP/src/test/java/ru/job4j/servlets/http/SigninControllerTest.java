@@ -22,7 +22,7 @@ public class SigninControllerTest {
      */
     @Before
     public void before() {
-        ValidateService.getInstance().add(null, login, null, null, password);
+        ValidateService.getInstance().add(null, login, null, null, password, null, null);
     }
 
     /**

@@ -35,8 +35,8 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        int id = Integer.valueOf(req.getParameter("id"));
-        vs.delete(id);
+        String login = req.getParameter("login");
+        vs.delete(login);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

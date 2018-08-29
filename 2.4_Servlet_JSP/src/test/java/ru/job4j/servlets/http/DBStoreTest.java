@@ -8,11 +8,10 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertThat;
+import java.time.LocalDate;
+
 import static org.mockito.Mockito.*;
-import static org.powermock.api.mockito.PowerMockito.when;
+
 
 @PrepareForTest(ValidateService.class)
 @RunWith(PowerMockRunner.class)
@@ -34,7 +33,7 @@ public class DBStoreTest {
      */
     @Test
     public void testAdd() {
-        User user = new User(1, "test1", "", "", "", "", null);
+        User user = new User("1", "test1", "", "", "", "", "");
         hft.add(user);
         verify(store, atLeastOnce()).add(user);
 
@@ -47,21 +46,8 @@ public class DBStoreTest {
      */
     @Test
     public void testUpdate() {
-        hft.update(null, null, null, null, null);
-        verify(store, atLeastOnce()).update(null, null, null, null, null);
-    }
-
-    /**
-     * Test findById.
-     */
-    @Test
-    public void testFindById() {
-        when(store.findById(1)).thenReturn(new User(1, "test1", "", "", "", "", null));
-        when(store.findById(2)).thenReturn(new User(1, "test2", "", "", "", "", null));
-        String expect1 = hft.findById(1).getName();
-        String expect2 = hft.findById(2).getName();
-        assertThat(expect1, is("test1"));
-        assertThat(expect2, not("test1"));
+        hft.update(null, null, null, null, null, null, null);
+        verify(store, atLeastOnce()).update(null, null, null, null, null, null, null);
     }
 
     /**
@@ -69,11 +55,11 @@ public class DBStoreTest {
      */
     @Test
     public void testDelete() {
-        hft.delete(1);
-        verify(store, atLeastOnce()).delete(1);
+        hft.delete("test1");
+        verify(store, atLeastOnce()).delete("test1");
 
-        hft.delete(1);
-        verify(store, times(2)).delete(1);
+        hft.delete("test1");
+        verify(store, times(2)).delete("test1");
     }
 
     /**
@@ -97,26 +83,28 @@ public class DBStoreTest {
          * @param email email
          * @param role role
          * @param password password
+         * @param country country
+         * @param city city
          */
-        private void update(String login, String name, String email, String role, String password) {
-            store.update(login, name, email, role, password);
+        private void update(String login, String name, String email, String role, String password, String country, String city) {
+            store.update(login, name, email, role, password, country, city);
         }
 
         /**
          * Delete.
-         * @param id id
+         * @param login login
          */
-        private void delete(int id) {
-            store.delete(id);
+        private void delete(String login) {
+            store.delete(login);
         }
 
         /**
          * Find.
-         * @param id id
+         * @param login login
          * @return user
          */
-        private User findById(int id) {
-            return store.findById(id);
+        private User findById(String login) {
+            return store.findByLogin(login);
         }
     }
 }

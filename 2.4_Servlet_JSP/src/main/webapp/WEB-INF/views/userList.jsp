@@ -22,7 +22,7 @@
                 <td>
                     <form action="${pageContext.servletContext.contextPath}/edit">
                         <input type="submit" value="edit user">
-                        <input type="hidden" name="id" value="${user.id}">
+                        <input type="hidden" name="login" value="${user.login}">
                     </form>
                 </td>
             </tr>

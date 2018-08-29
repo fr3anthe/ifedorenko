@@ -23,7 +23,7 @@ public class UserUpdateServletTest {
      */
     @Before
     public void before() {
-        ValidateService.getInstance().add(null, login, null, null, null);
+        ValidateService.getInstance().add(null, login, null, null, null, null, null);
     }
 
     /**

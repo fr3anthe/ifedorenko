@@ -25,7 +25,7 @@ public class UsersServletTest {
      */
     @Before
     public void before() {
-        ValidateService.getInstance().add(null, login, null, null, null);
+        ValidateService.getInstance().add(null, login, null, null, null, null, null);
     }
 
     /**
@@ -38,10 +38,9 @@ public class UsersServletTest {
         UsersServlet servlet = new UsersServlet();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        String id = String.valueOf(ValidateService.getInstance().findByLogin(login).getId());
 
         int expect = ValidateService.getInstance().findAll().size();
-        when(request.getParameter("id")).thenReturn(id);
+        when(request.getParameter("login")).thenReturn(login);
         servlet.doPost(request, response);
 
         int result = ValidateService.getInstance().findAll().size();
