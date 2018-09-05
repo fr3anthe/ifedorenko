@@ -8,14 +8,15 @@
 	<url>http://job4j.ru/</url>
 
 	<modules>
-		<module>1.1_Base</module>
-		<module>1.2_OOP</module>
-		<module>1.3_Collections_Lite</module>
-		<module>2.1_Collections_Pro</module>
-		<module>2.2_Multithreading</module>
-		<module>2.3_SQL_JDBC</module>
-        <module>2.4_Servlet_JSP</module>
-
+		<module>1.1-Base</module>
+		<module>1.2-OOP</module>
+		<module>1.3-Collections-Lite</module>
+		<module>2.1-Collections-Pro</module>
+		<module>2.2-Multithreading</module>
+		<module>2.3-SQL-JDBC</module>
+        <module>2.4-Servlet-JSP</module>
+        <module>Personal</module>
+        <module>2.4-Servlet-JSP-FinalTask</module>
     </modules>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
