@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            function addUser() {
+                if (validate()) {
+                    createUser();
+                }
+            }
+
+            function validate() {
+                var result = true;
+                var view = '';
+                if ($('#fname').val() == '') {
+                    result = false;
+                    view += ($("#fname").attr('title')) + '\n';
+                }
+                if ($('#lname').val() == '') {
+                    result = false;
+                    view += ($("#lname").attr('title')) + '\n';
+                }
+                if (!result) {
+                    alert(view);
+                }
+                return result;
+            }
+
+            function loadUsers() {
+                $.ajax({
+                    type:"GET",
+                    url: "/json",
+                    complete: function (data) {
+                        var result = "<tr>" +
+                            "<th>Firstname</th>\n" +
+                            "<th>Lastname</th>\n" +
+                            "<th>sex</th>\n" +
+                            "<th>description</th>\n"
+                        "</tr>";
+                        var users = JSON.parse(data.responseText);
+                        for (var i = 0; i != users.length; i++) {
+                            result += "<tr>" +
+                                "<td>" + users[i].firstName + "</td>\n" +
+                                "<td>" + users[i].lastName + "</td>\n" +
+                                "<td>" + users[i].sex + "</td>\n" +
+                                "<td>" + users[i].description + "</td>\n" +
+                                "</tr>";
+                        }
+                        var table = document.getElementById("table");
+                        table.innerHTML = result;
+                    }
+                });
+            }
+
+            function createUser() {
+                $.ajax({
+                    type: "POST",
+                    url: "/json",
+                    data:
+                        JSON.stringify({firstName: $('#fname').val(),
+                            lastName: $('#lname').val(),
+                            sex: $('input:radio[name=optradio]:checked').val(),
+                            description: $('#description').val()}
+                        ),
+                    success : function (data, textStatus) {
+                        if(textStatus) {
+                            loadUsers();
+                        }
+                    }
+                })
+            }
+
+            /*function addRow() {
+                var fname = $('#fname').val();
+                var lname = $('#lname').val();
+                var description = $('#description').val();
+                var sex = $('input:radio[name=optradio]:checked').val();
+                $('#table tr:last').after('<tr><td>' + fname +'</td>' +
+                    '<td>' + lname +'</td>' +
+                    '<td>' + sex +'</td>' +
+                    '<td>' + description +'</td></tr>');
+            }*/
+        </script>
+    </head>
+    <body>
+
+        <div class="container">
+            <h2>Form</h2>
+            <form action="/items">
+                <div class="form-group">
+                    <label for="fname">Firstname:</label>
+                    <input type="text" class="form-control" id="fname" title="Enter user first name." placeholder="Enter firstname" name="fname">
+                </div>
+                <div class="form-group">
+                    <label for="lname">Lastname:</label>
+                    <input type="text" class="form-control" id="lname" title="Enter user last name."placeholder="Enter lastname" name="lname">
+                </div>
+
+                Sex:
+                <label class="radio-inline"><input type="radio" name="optradio" value="male" checked>male</label>
+                <label class="radio-inline"><input type="radio" name="optradio" value="female">female</label>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" rows="5" id="description"></textarea>
+                </div>
+                <button type="button" class="btn btn-default" onclick="addUser();">Submit</button>
+            </form>
+        </div>
+        <br><br><br>
+
+        <div class="container">
+            <h2>Users</h2>
+            <table id="table" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Sex</th>
+                    <th>description</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
