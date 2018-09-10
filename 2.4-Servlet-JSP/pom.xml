@@ -4,7 +4,7 @@
 	<artifactId>2.4-Servlet-JSP</artifactId>
 	<packaging>war</packaging>
 	<version>2.0</version>
-	<name>2.4_Servlet_JSP</name>
+	<name>2.4-Servlet-JSP</name>
 
     <parent>
         <artifactId>junior</artifactId>
