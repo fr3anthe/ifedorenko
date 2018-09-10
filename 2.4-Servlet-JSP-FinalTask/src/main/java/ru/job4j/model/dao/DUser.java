@@ -3,11 +3,12 @@ package ru.job4j.model.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.model.database.DBConnection;
-import ru.job4j.model.entities.MusicType;
+import ru.job4j.model.entities.MusicStyle;
 import ru.job4j.model.entities.User;
 import ru.job4j.model.repo.UserRepo;
 
 import java.sql.*;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -45,7 +46,7 @@ public class DUser implements DAO<User>, UserRepo {
                     user.setId(id);
                 }
             }
-            if (id != 0 && user.getMusicTypes().size() > 0) {
+            if (id != 0 && user.getMusicStyles().size() > 0) {
                 DUserMusic.getInstance().add(user);
             }
         } catch (SQLException e) {
@@ -69,7 +70,7 @@ public class DUser implements DAO<User>, UserRepo {
             ps.setInt(4, nUser.getAddress().getId());
             ps.executeUpdate();
 
-            if (nUser.getMusicTypes().size() > 0) {
+            if (nUser.getMusicStyles().size() > 0) {
                 DUserMusic userMusic = DUserMusic.getInstance();
                 userMusic.delete(nUser.getId());
                 userMusic.add(nUser);
@@ -101,15 +102,15 @@ public class DUser implements DAO<User>, UserRepo {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    temp = new User(rs.getInt("id"),
-                            rs.getString("login"),
-                            DRole.getInstance().getById(rs.getInt("role_id")),
-                            DAddress.getInstance().getById(rs.getInt("address_id"))
-                            );
+                    temp = new User.Builder(rs.getString("login"))
+                            .id(rs.getInt("id"))
+                            .password(rs.getString("password"))
+                            .role(DRole.getInstance().getById(rs.getInt("role_id")))
+                            .address(DAddress.getInstance().getById(rs.getInt("address_id")))
+                            .music(this.getMusicStyles(rs.getInt("id")))
+                            .build();
                 }
-
             }
-            this.getMusicTypes(temp);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         } finally {
@@ -143,23 +144,25 @@ public class DUser implements DAO<User>, UserRepo {
 
     /**
      * Method getMusicTypes.
-     * @param user user
+     * @param id id
+     * @return list
      */
-    private void getMusicTypes(User user) {
-        List<MusicType> list = null;
-        String query = "select music_id as from user_music where user_id = ?";
+    private List<MusicStyle> getMusicStyles(final int id) {
+        List<MusicStyle> list = new LinkedList<>();
+        String query = "select music_id as id from user_music where user_id = ?";
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setInt(1, user.getId());
+                ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
-                        list.add(DMusicType.getInstance().getById(rs.getInt("id")));
+                        MusicStyle ms = DMusicStyle.getInstance().getById(rs.getInt("id"));
+                        list.add(ms);
                     }
                 }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         } finally {
-            user.setMusicTypes(list);
+            return list;
         }
     }
 
@@ -169,19 +172,18 @@ public class DUser implements DAO<User>, UserRepo {
      * @return user' list
      */
     private List<User> findAllUsers(String query) {
-        List<User> list = null;
-        User temp = null;
+        List<User> list = new LinkedList<>();
         try (Connection connect = DBConnection.getInstance().getConnection();
              PreparedStatement ps = connect.prepareStatement(query)) {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    temp = new User(rs.getInt("id"),
-                            rs.getString("login"),
-                            DRole.getInstance().getById(rs.getInt("role_id")),
-                            DAddress.getInstance().getById(rs.getInt("address_id"))
-                    );
-                    this.getMusicTypes(temp);
-                    list.add(temp);
+                  list.add(new User.Builder(rs.getString("login"))
+                            .id(rs.getInt("id"))
+                            .password(rs.getString("password"))
+                            .role(DRole.getInstance().getById(rs.getInt("role_id")))
+                            .address(DAddress.getInstance().getById(rs.getInt("address_id")))
+                            .music(this.getMusicStyles(rs.getInt("id")))
+                            .build());
                 }
             }
         } catch (SQLException e) {
@@ -191,6 +193,22 @@ public class DUser implements DAO<User>, UserRepo {
         }
     }
 
+    /**
+     * Method isCredential. If user exist, then return it.
+     * @param login login for check.
+     * @param password password for check.
+     * @return user.
+     */
+    public User isCredential(String login, String password) {
+        User temp = null;
+        for (User user : this.getAll()) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                temp = user;
+                break;
+            }
+        }
+        return temp;
+    }
 
     /**
      * Getter for INSTANCE.

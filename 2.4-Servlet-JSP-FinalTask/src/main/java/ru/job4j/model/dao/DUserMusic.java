@@ -3,7 +3,7 @@ package ru.job4j.model.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.model.database.DBConnection;
-import ru.job4j.model.entities.MusicType;
+import ru.job4j.model.entities.MusicStyle;
 import ru.job4j.model.entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +31,7 @@ public class DUserMusic implements DAO<User> {
         String query = "insert into user_music(user_id, music_id) value (?, (select id from music_types where name = ?))";
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement(query)) {
-            for (MusicType mt : user.getMusicTypes()) {
+            for (MusicStyle mt : user.getMusicStyles()) {
                 ps.setInt(1, user.getId());
                 ps.setString(2, mt.getName());
                 ps.executeUpdate();

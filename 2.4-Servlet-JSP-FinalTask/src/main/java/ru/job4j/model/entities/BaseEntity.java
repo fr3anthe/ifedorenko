@@ -6,54 +6,26 @@ package ru.job4j.model.entities;
  * @author ifedorenko
  * @since 05.09.2018
  */
-public class BaseEntity {
+public class BaseEntity implements Entity {
     protected int id;
     protected String name;
 
-    /**
-     * Constructor.
-     */
-    public BaseEntity() {
-    }
-
-    /**
-     * Constrcutor.
-     * @param id id
-     * @param name name
-     */
-    public BaseEntity(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    /**
-     * Getter for id.
-     * @return id
-     */
+    @Override
     public int getId() {
         return id;
     }
 
-    /**
-     * Setter for id
-     * @param id id's value
-     */
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * Getter for name.
-     * @return name
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * Setter for name.
-     * @param name name's value
-     */
+    @Override
     public void setName(String name) {
         this.name = name;
     }

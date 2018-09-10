@@ -18,10 +18,10 @@ import java.util.Properties;
  */
 public class DBConnection {
     private static final Logger LOGGER = LoggerFactory.getLogger(DBConnection.class);
-    private final String config = "musicPlatform.properties";
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static final DBConnection INSTANCE = new DBConnection();
     private final Properties properties;
+    private final String config = "musicPlatform.properties";
     private final String driver = "org.postgresql.Driver";
     private final String url = "db.host";
     private final String username = "db.login";

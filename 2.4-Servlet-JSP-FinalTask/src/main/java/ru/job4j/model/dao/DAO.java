@@ -1,13 +1,15 @@
 package ru.job4j.model.dao;
 
 import ru.job4j.model.entities.BaseEntity;
+import ru.job4j.model.entities.Entity;
+
 import java.util.List;
 
 /**
  * Interface DAO.
  * @param <T> extends BaseEntity
  */
-public interface DAO<T extends BaseEntity> {
+public interface DAO<T extends Entity> {
 
     /**
      * Method add in db.

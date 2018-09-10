@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Interface UserRepo.
  */
-public interface UserRepo extends RoleRepo {
+public interface UserRepo {
     /**
      * Method findByAddress.
      * @param address for finding.
@@ -19,4 +19,10 @@ public interface UserRepo extends RoleRepo {
      * @return user's list
      */
     List<User> findByMusicType(String musicType);
+    /**
+     * Method findByRole
+     * @param role for finding.
+     * @return user's list
+     */
+    List<User> findByRole(String role);
 }
