@@ -37,7 +37,7 @@
                     <th>role</th>
                     <th>country</th>
                     <th>city</th>
-                    <th colspan="2">action</th>
+                    <th colspan="3">action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +59,12 @@
                                 <form action="${pageContext.servletContext.contextPath}/list" method="post">
                                     <input type="submit" class="btn btn-warning" value="delete user">
                                     <input type="hidden" name="login" value="${user.login}">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="${pageContext.servletContext.contextPath}/upload" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="file"/>
+                                    <input type="submit" class="btn btn-warning" value="upload">
                                 </form>
                             </td>
                         </tr>
