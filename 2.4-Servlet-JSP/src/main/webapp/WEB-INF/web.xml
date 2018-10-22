@@ -5,7 +5,7 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-    <filter>
+   <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>ru.job4j.servlets.http.AuthFilter</filter-class>
     </filter>
@@ -23,7 +23,7 @@
         <url-pattern>/json</url-pattern>
     </servlet-mapping>
 
-    <servlet>
+   <servlet>
         <servlet-name>JsonCityController</servlet-name>
         <servlet-class>ru.job4j.servlets.http.JsonCityController</servlet-class>
     </servlet>

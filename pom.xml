@@ -17,6 +17,7 @@
         <module>2.4-Servlet-JSP</module>
         <module>Personal</module>
         <module>2.4-Servlet-JSP-FinalTask</module>
+        <module>3.1-Hibernate</module>
     </modules>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
