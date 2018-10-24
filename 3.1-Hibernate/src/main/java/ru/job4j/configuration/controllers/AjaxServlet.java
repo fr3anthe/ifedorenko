@@ -36,7 +36,6 @@ public class AjaxServlet extends HttpServlet {
         BufferedReader reader = req.getReader();
         StringBuilder sb = new StringBuilder();
         sb.append(reader.readLine());
-        reader.close();
         Item item = mapper.readValue(sb.toString(), Item.class);
         service.add(item);
     }

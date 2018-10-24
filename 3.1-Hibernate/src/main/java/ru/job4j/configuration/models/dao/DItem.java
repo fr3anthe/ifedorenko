@@ -2,6 +2,7 @@ package ru.job4j.configuration.models.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.configuration.models.database.HibernateFactory;
@@ -35,53 +36,81 @@ public class DItem implements DAO<Item> {
 
     @Override
     public void add(Item item) {
-        try (Session session = factory.openSession()) {
-            session.beginTransaction();
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
             session.save(item);
-            session.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            tx.rollback();
+        } finally {
+            tx.commit();
+            session.close();
         }
     }
 
     @Override
     public void update(Item item) {
-        try (Session session = factory.openSession()) {
-            session.beginTransaction();
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
             session.update(item);
-            session.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            tx.rollback();
+        } finally {
+            tx.commit();
+            session.close();
         }
     }
 
     @Override
     public void delete(int id) {
-        try (Session session = factory.openSession()) {
-            session.beginTransaction();
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
             Item item = new Item();
             item.setId(id);
             session.delete(item);
-            session.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            tx.rollback();
+        } finally {
+            tx.commit();
+            session.close();
         }
     }
 
     @Override
     public Item getById(int id) {
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
         Item temp = null;
-        try (Session session = factory.openSession()) {
-            session.beginTransaction();
+        try {
             temp = session.get(Item.class, id);
-            session.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            tx.rollback();
         } finally {
+            tx.commit();
+            session.close();
             return temp;
         }
     }
 
     @Override
     public List<Item> getAll() {
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
         List<Item> items = null;
-        try (Session session = factory.openSession()) {
-            session.beginTransaction();
+        try {
             items = session.createQuery("from ru.job4j.configuration.models.entities.Item").getResultList();
-            session.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            tx.rollback();
         } finally {
+            tx.commit();
+            session.close();
             return items;
         }
     }
