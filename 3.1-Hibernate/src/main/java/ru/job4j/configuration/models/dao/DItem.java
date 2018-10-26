@@ -9,6 +9,7 @@ import ru.job4j.configuration.models.database.HibernateFactory;
 import ru.job4j.configuration.models.entities.Item;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Class DItem implements DAO for item.
@@ -35,83 +36,76 @@ public class DItem implements DAO<Item> {
     }
 
     @Override
-    public void add(Item item) {
-        final Session session = factory.openSession();
-        final Transaction tx = session.beginTransaction();
+    public int add(final Item item) {
+        int temp = -1;
         try {
-            session.save(item);
+           temp = this.tx(session -> {
+                session.save(item);
+                return item.getId();
+            });
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            tx.rollback();
-        } finally {
-            tx.commit();
-            session.close();
         }
+        return temp;
     }
 
     @Override
-    public void update(Item item) {
-        final Session session = factory.openSession();
-        final Transaction tx = session.beginTransaction();
+    public int update(final Item item) {
+        int temp = -1;
         try {
-            session.update(item);
+            temp = this.tx(session -> {
+                session.update(item);
+                return item.getId();
+            });
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            tx.rollback();
-        } finally {
-            tx.commit();
-            session.close();
         }
+        return temp;
     }
 
     @Override
-    public void delete(int id) {
-        final Session session = factory.openSession();
-        final Transaction tx = session.beginTransaction();
+    public int delete(final int id) {
+        int temp = -1;
+        Item delete = new Item();
+        delete.setId(id);
         try {
-            Item item = new Item();
-            item.setId(id);
-            session.delete(item);
+            temp = this.tx(session -> {
+                session.delete(delete);
+                return id;
+            });
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            tx.rollback();
-        } finally {
-            tx.commit();
-            session.close();
         }
+        return temp;
     }
 
     @Override
-    public Item getById(int id) {
-        final Session session = factory.openSession();
-        final Transaction tx = session.beginTransaction();
-        Item temp = null;
-        try {
-            temp = session.get(Item.class, id);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-            tx.rollback();
-        } finally {
-            tx.commit();
-            session.close();
-            return temp;
-        }
+    public Item getById(final int id) {
+        return this.tx(session -> session.get(Item.class, id));
     }
 
     @Override
     public List<Item> getAll() {
+        return this.tx(session -> session.createQuery("from ru.job4j.configuration.models.entities.Item").getResultList());
+    }
+
+    /**
+     * Method for wrapper.
+     * @param command functional interface for lambda
+     * @param <T> return type.
+     * @return param T
+     */
+    private <T> T tx(final Function<Session, T> command) {
         final Session session = factory.openSession();
         final Transaction tx = session.beginTransaction();
-        List<Item> items = null;
         try {
-            items = session.createQuery("from ru.job4j.configuration.models.entities.Item").getResultList();
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-            tx.rollback();
+            return command.apply(session);
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
         } finally {
             tx.commit();
             session.close();
-            return items;
         }
     }
 

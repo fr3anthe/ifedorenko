@@ -11,20 +11,23 @@ public interface DAO<T extends Serializable> {
     /**
      * Add T in db.
      * @param t for adding;
+     * @return id or -1 if error
      */
-    void add(T t);
+    int add(T t);
 
     /**
      * Update T in db.
      * @param t for updating
+     * @return id or -1 if error
      */
-    void update(T t);
+    int update(T t);
 
     /**
      * Delete T from db.
      * @param id for deleting
+     * @return id or -1 if error
      */
-    void delete(int id);
+    int delete(int id);
 
     /**
      * Get T from bd by id.
