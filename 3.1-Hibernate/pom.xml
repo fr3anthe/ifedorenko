@@ -3,9 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>3.1-Hibernate</artifactId>
     <version>2.0</version>
-    <packaging>war</packaging>
-    <groupId>ru.job4j</groupId>
-    <name>3.1-Hibernate</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>3.1.1.1-Configure</module>
+        <module>3.1.2.1-Car</module>
+    </modules>
 
     <parent>
         <groupId>ru.job4j</groupId>
@@ -18,22 +21,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.3.6.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>RELEASE</version>
         </dependency>
     </dependencies>
 </project>
