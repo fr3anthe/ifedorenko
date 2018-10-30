@@ -1,0 +1,12 @@
+<hibernate-mapping>
+    <class name="ru.job4j.car.model.entities.xml.CarXML" table="car">
+        <id name="id" column="id">
+            <generator class ="identity"/>
+        </id>
+        <property name="name" column="name"/>
+
+        <many-to-one name="carbody" cascade="persist" column="carbody_id" class="ru.job4j.car.model.entities.xml.CarbodyXML"/>
+        <many-to-one name="engine" cascade="persist" column="engine_id" class="ru.job4j.car.model.entities.xml.EngineXML"/>
+        <many-to-one name="transmission" cascade="persist" column="transmission_id" class="ru.job4j.car.model.entities.xml.TransmissionXML"/>
+    </class>
+</hibernate-mapping>

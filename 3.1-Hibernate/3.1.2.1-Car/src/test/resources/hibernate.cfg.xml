@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/hibernate_car_test</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">310266</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+
+        <mapping resource="hibernate/CarXML.hbm.xml"/>
+        <mapping resource="hibernate/CarbodyXML.hbm.xml"/>
+        <mapping resource="hibernate/EngineXML.hbm.xml"/>
+        <mapping resource="hibernate/TransmissionXML.hbm.xml"/>
+
+        <mapping class="ru.job4j.car.model.entities.annotation.EngineAnnotation"/>
+        <mapping class="ru.job4j.car.model.entities.annotation.CarAnnotation"/>
+        <mapping class="ru.job4j.car.model.entities.annotation.CarbodyAnnotation"/>
+        <mapping class="ru.job4j.car.model.entities.annotation.TransmissionAnnotation"/>
+    </session-factory>
+</hibernate-configuration>
