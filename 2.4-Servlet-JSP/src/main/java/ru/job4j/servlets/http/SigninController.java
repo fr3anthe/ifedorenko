@@ -15,9 +15,6 @@ public class SigninController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            System.out.println(cookie.getName() + " " + cookie.getValue());
-        }
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         if (ValidateService.getInstance().isCredential(login, password)) {
