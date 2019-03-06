@@ -78,7 +78,9 @@
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
 		<!--<module name="JavaDoc"/>-->
-		<module name="JavadocMethod"/>
+		<module name="JavadocMethod">
+			<property name="allowMissingPropertyJavadoc" value="true"/>
+		</module>
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->
         <!--<module name="DesignForExtension"/>-->
