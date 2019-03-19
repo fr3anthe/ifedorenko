@@ -28,7 +28,6 @@ public class LoginController extends HttpServlet {
         if (id != FAIL_LOGIN) {
             HttpSession session = request.getSession();
             session.setAttribute("login", login);
-            session.setAttribute("id", id);
             response.sendRedirect(String.format("%s/listAd", request.getContextPath()));
         } else {
             request.setAttribute("error", "credentional invalid");
