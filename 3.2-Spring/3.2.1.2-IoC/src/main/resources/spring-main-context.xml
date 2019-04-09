@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="database" class="ru.job4j.model.storage.Database" init-method="connectDB" destroy-method="closeConnection">
+        <property name="host" value="jdbc:postgresql://localhost:5432/ioc_jdbc"/>
+        <property name="login" value="postgres"/>
+        <property name="password" value="310266"/>
+        <property name="table" value="users"/>
+    </bean>
+    <bean id="jdbc" class="ru.job4j.model.storage.JdbcStorage">
+        <constructor-arg name="database" ref="database"></constructor-arg>
+    </bean>
+    <bean id="importUser" class="ru.job4j.ImportUser">
+        <constructor-arg name="us" ref="jdbc"></constructor-arg>
+    </bean>
+</beans>
