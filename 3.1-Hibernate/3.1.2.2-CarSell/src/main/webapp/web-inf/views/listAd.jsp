@@ -25,17 +25,19 @@
                     <tr>
                         <th>theme</th>
                         <th class="w-25">author</th>
+                        <th class="w-25">date</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
                 <c:forEach items="${ads}" var="ad">
-                    <c:if test="${(ad.user.login == sessionScope.login) || (ad.status == 'true')}" >
+                    <c:if test="${(ad.user.login == sessionScope.user.login) || (ad.status == 'true')}" >
                     <tr>
                         <td>
                             <c:set var="id" value="${ad.id}"/>
                             <a class="text-light bg-dark" href="aboutAd?id=<c:out value="${id}"/>">${ad.theme}</a>
                         </td>
                         <td>${ad.user.login}</td>
+                        <td>${ad.date}</td>
                      </tr>
                      </c:if>
                 </c:forEach>

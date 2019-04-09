@@ -40,6 +40,16 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
+    /**
+     * Constructor.
+     * @param id id
+     * @param login login
+     */
+    public User(int id, String login) {
+        this.id = id;
+        this.login = login;
+    }
+
     public String getLogin() {
         return login;
     }

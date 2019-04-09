@@ -48,7 +48,7 @@
                 <dt>Contact to order</dt>
                 <dd>${ad.user.email}</dd>
                 <br><br>
-                <c:if test="${ad.user.login == sessionScope.login}">
+                <c:if test="${ad.user.login == sessionScope.user.login}">
                 <dt>Change status:</dt>
                 <dd>
                     <form action="${pageContext.servletContext.contextPath}/aboutAd" method="post">

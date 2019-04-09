@@ -1,5 +1,7 @@
 package ru.job4j.controllers.filters;
 
+import ru.job4j.model.entities.User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,7 @@ public class AuthFilter implements Filter {
         } else if (req.getRequestURI().contains("/registration")) {
             chain.doFilter(request, response);
         } else {
-            if (((HttpServletRequest) request).getSession().getAttribute("login") == null) {
+            if (((User) ((HttpServletRequest) request).getSession().getAttribute("user")).getLogin() == null) {
                 ((HttpServletResponse) response).sendRedirect(String.format("%s/login", req.getContextPath()));
                 return;
             }

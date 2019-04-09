@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,7 @@ public class CreateAdController extends HttpServlet {
     private static final String NO_PHOTO = "no photo";
     private static final String IMAGE = "image";
     private static final String FILE = "file";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("brands", DBrand.getInstance().getAll());
@@ -49,7 +51,8 @@ public class CreateAdController extends HttpServlet {
             String theme = request.getParameter("theme");
             Car car = this.createCar(request, vin);
             User user = this.getUser(request);
-            DAdvertisement.getInstance().add(new Advertisement(theme, car, user, STATUS));
+            boolean path = this.saveImage(request, vin);
+            DAdvertisement.getInstance().add(new Advertisement(theme, car, user, new Timestamp(System.currentTimeMillis()), path, STATUS));
             response.sendRedirect(String.format("%s/listAd", request.getContextPath()));
         }
     }
@@ -80,7 +83,7 @@ public class CreateAdController extends HttpServlet {
      * @return user
      */
     private User getUser(HttpServletRequest req) {
-        int id = (Integer) req.getSession().getAttribute("id");
+        int id = ((User) req.getSession().getAttribute("user")).getId();
         return DUser.getInstance().getById(id);
     }
 
@@ -92,20 +95,18 @@ public class CreateAdController extends HttpServlet {
      * @throws IOException exception
      * @throws ServletException exception
      */
-    private String getPathToPhoto(HttpServletRequest req, String vin) throws IOException, ServletException {
-        String path = null;
+    private boolean saveImage(HttpServletRequest req, String vin) throws IOException, ServletException {
+        boolean result = false;
         List<Part> fileParts = req.getParts().stream().filter(part -> FILE.equals(part.getName())).collect(Collectors.toList());
         if (fileParts.size() > 0 && fileParts.get(0).getContentType().contains(IMAGE)) {
-            path = this.checkPaths(vin);
+            String path = this.checkPaths(vin);
             for (Part filePart : fileParts) {
                 String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
                 filePart.write(path + File.separator + fileName);
             }
-            path = vin;
-        } else {
-            path = NO_PHOTO;
+            result = true;
         }
-        return path;
+        return result;
     }
 
     /**

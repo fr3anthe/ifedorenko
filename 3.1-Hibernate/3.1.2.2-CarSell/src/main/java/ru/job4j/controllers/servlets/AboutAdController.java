@@ -18,10 +18,10 @@ public class AboutAdController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Advertisement ad  = DAdvertisement.getInstance().getById(Integer.valueOf(request.getParameter("id")));
-        File path = new File(getServletContext().getInitParameter("imageLocation") + File.separator + ad.getCar().getVin() + File.separator);
-        List<String> images = new LinkedList<>();
-        if (path.exists()) {
-            for (File file : path.listFiles()) {
+        if (ad.isImage()) {
+            String path = getServletContext().getInitParameter("imageLocation") + File.separator + ad.getCar().getVin() + File.separator;
+            List<String> images = new LinkedList<>();
+            for (File file : new File(path).listFiles()) {
                 images.add(file.toString().replace("\\", "/"));
             }
             request.setAttribute("images", images);

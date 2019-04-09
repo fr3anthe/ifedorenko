@@ -1,5 +1,6 @@
 package ru.job4j.controllers.servlets;
 
+import ru.job4j.model.entities.User;
 import ru.job4j.service.ValidateService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,7 @@ public class LoginController extends HttpServlet {
         int id = ValidateService.getInstance().isUserCredential(login, password);
         if (id != FAIL_LOGIN) {
             HttpSession session = request.getSession();
-            session.setAttribute("login", login);
+            session.setAttribute("user", new User(id, login));
             response.sendRedirect(String.format("%s/listAd", request.getContextPath()));
         } else {
             request.setAttribute("error", "credentional invalid");
