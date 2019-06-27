@@ -36,35 +36,6 @@ public class DAdvertisement extends DAOAbstract<Advertisement> {
         return this.tx(session -> session.createQuery("from ru.job4j.model.entities.Advertisement").getResultList());
     }
 
-    public List<Advertisement> getByLastDay() {
-        return this.tx(session -> {
-            Query query = session.createQuery("from ru.job4j.model.entities.Advertisement where date > :date");
-            query.setParameter("date", new Timestamp(System.currentTimeMillis() - 86400000));
-            return query.list();
-        });
-    }
-
-    public List<Advertisement> getAllWithPhoto() {
-        return this.tx(session -> {
-            Query query = session.createQuery("from ru.job4j.model.entities.Advertisement where image = :image");
-            query.setParameter("image", true);
-            return query.list();
-        });
-    }
-
-    /**
-     * Method getAllByModel.
-     * @param model model
-     * @return list
-     */
-    public List<Advertisement> getAllByModel(String model) {
-        return this.tx(session -> {
-            Query query = session.createQuery("from ru.job4j.model.entities.Advertisement a where a.car.model = :model");
-            query.setParameter("model", model);
-            return query.list();
-        });
-    }
-
     /**
      * Method getInstance.
      * @return INSTANCE
