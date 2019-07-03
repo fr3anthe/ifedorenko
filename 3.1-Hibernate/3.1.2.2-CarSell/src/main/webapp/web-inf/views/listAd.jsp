@@ -8,6 +8,31 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script>
+            function checkModelFilter() {
+                if ($('#filter').val() == 'model') {
+                    $('#model').show();
+                } else {
+                    $('#model').hide();
+                }
+            }
+
+            function validateFilter() {
+                var result = true;
+                var temp = $('#filter');
+                if (temp.val() == '') {
+                    alert(temp.attr('title'));
+                    result = false;
+                } else if (temp.val() == 'model') {
+                    temp = $('#model');
+                    if (temp.val() == '') {
+                        alert(temp.attr('title'));
+                        result = false;
+                    }
+                }
+                return result;
+            }
+        </script>
     </head>
     <body style="background-color: darkseagreen">
     <div class="container-fluid">
@@ -20,6 +45,23 @@
         <br>
         <div class="container-fluid">
             <h3 align="center">Cars</h3>
+            <div class="form-group">
+                <form class="form-inline float-right" action="${pageContext.servletContext.contextPath}/filter" onsubmit="return validateFilter()">
+                    <div align="right">
+                        <select title="Choose filter" id ="filter" name="filter" onchange="checkModelFilter()">
+                            <option value="">Choose filter</option>
+                            <option value="day">last day</option>;
+                            <option value="photo">with photo</option>
+                            <option value="model">model</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input style="display: none" id="model" title="Enter car model!" name="model">
+                    </div>
+                    <input type="submit" value="Отфильтровать">
+                </form>
+            </div>
+            <br>
              <table style="text-align: center" class="table table-hover table-bordered table-dark">
                 <thead class="thead-gray">
                     <tr>

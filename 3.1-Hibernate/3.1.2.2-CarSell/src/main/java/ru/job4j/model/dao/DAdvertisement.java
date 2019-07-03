@@ -37,6 +37,43 @@ public class DAdvertisement extends DAOAbstract<Advertisement> {
     }
 
     /**
+     * Метод для фильтрации.
+     * @return все заявки за последний день.
+     */
+    public List<Advertisement> getByLastDay() {
+        return this.tx(session -> {
+            Query query = session.createQuery("from ru.job4j.model.entities.Advertisement where date > :date");
+            query.setParameter("date", Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
+            return query.list();
+        });
+    }
+
+    /**
+     * Метод для фильтрации.
+     * @return все заявки с фотографиями.
+     */
+    public List<Advertisement> getAllWithPhoto() {
+        return this.tx(session -> {
+            Query query = session.createQuery("from ru.job4j.model.entities.Advertisement where image = :image");
+            query.setParameter("image", true);
+            return query.list();
+        });
+    }
+
+    /**
+     * Метод для фильтрации.
+     * @param model модель машины
+     * @return все заявки по заданной модели.
+     */
+    public List<Advertisement> getAllByModel(String model) {
+        return this.tx(session -> {
+            Query query = session.createQuery("from ru.job4j.model.entities.Advertisement a where a.car.model = :model");
+            query.setParameter("model", model);
+            return query.list();
+        });
+    }
+
+    /**
      * Method getInstance.
      * @return INSTANCE
      */
