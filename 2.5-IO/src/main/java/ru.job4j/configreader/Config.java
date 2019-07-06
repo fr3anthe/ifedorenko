@@ -29,10 +29,10 @@ public class Config {
      * Method for load config file.
      */
     public void load() {
-        try (InputStream is = new FileInputStream(this.path)) {
-            Properties properties = new Properties();
-            properties.load(is);
-            properties.forEach((k, v) -> values.put((String) k, (String) v));
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+            read.lines()
+                    .filter(l -> l.contains("="))
+                    .forEach(l -> this.values.put(l.substring(0, l.indexOf("=")), l.substring(l.indexOf("=") + 1)));
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }
