@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/hibernate_car_sell_test</property>
-        <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.username">postgres</property>
-        <property name="connection.password">310266</property>
-        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="connection.url">jdbc:hsqldb:mem:carsell;sql.enforce_size=false</property>
+        <property name="connection.driver_class">org.hsqldb.jdbc.JDBCDriver</property>
+        <property name="connection.username">sa</property>
+        <property name="connection.password"></property>
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <mapping class="ru.job4j.model.entities.Car"/>
         <mapping class="ru.job4j.model.entities.Carbody"/>
         <mapping class="ru.job4j.model.entities.Engine"/>
         <mapping class="ru.job4j.model.entities.Transmission"/>
+        <mapping class="ru.job4j.model.entities.Advertisement"/>
+        <mapping class="ru.job4j.model.entities.User"/>
+        <mapping class="ru.job4j.model.entities.Brand"/>
     </session-factory>
 </hibernate-configuration>

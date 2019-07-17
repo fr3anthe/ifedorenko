@@ -40,4 +40,6 @@ public class DBrand extends  DAOAbstract<Brand> {
     public static DBrand getInstance() {
         return INSTANCE;
     }
+
+
 }

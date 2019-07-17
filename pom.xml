@@ -19,6 +19,7 @@
         <module>2.4-Servlet-JSP-FinalTask</module>
         <module>3.1-Hibernate</module>
         <module>3.2-Spring</module>
+        <module>2.5-IO</module>
     </modules>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
