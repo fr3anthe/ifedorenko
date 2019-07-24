@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Search {
     private LinkedList<File> files = new LinkedList<>();
+    private List<String> extension;
 
     /**
      * Метод для обхода каталога.
@@ -20,12 +21,13 @@ public class Search {
      * @return список файлов, удовлетворяющих критерию поиска
      */
     public List<File> searchFiles(String parent, List<String> exts) {
+        this.extension = exts;
         List<File> result = new ArrayList<>();
         files.add(new File(parent));
         while (!files.isEmpty()) {
             Arrays.stream(files.remove().listFiles())
                     .filter(this::isNotDirectory)
-                    .filter(f -> exts.contains(f.getName().substring(f.getName().lastIndexOf(".") + 1)))
+                    .filter(this::checkExtension)
                     .forEach(result::add);
         }
         return result;
@@ -44,5 +46,14 @@ public class Search {
             result = false;
         }
         return result;
+    }
+
+    /**
+     * Проверяется соотвествие по заданным разрешениям.
+     * @param file file
+     * @return результат проверки.
+     */
+    private boolean checkExtension(File file) {
+        return extension.contains(file.getName().substring(file.getName().lastIndexOf(".") + 1));
     }
 }
