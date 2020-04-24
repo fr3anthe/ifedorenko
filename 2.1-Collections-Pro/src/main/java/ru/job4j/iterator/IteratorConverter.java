@@ -23,11 +23,7 @@ public class IteratorConverter {
 
                 @Override
                 public boolean hasNext() {
-                    boolean res = false;
-                    if (iterator.hasNext()) {
-                        res = true;
-                    }
-                    return res;
+                    return this.iterator.hasNext();
                 }
 
                 @Override
